@@ -1,0 +1,80 @@
+// Place all the styles related to the profile controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.profile{
+
+  background: black;
+font-family: 'Gotham';
+color: white;
+
+
+}
+
+.attributes-display{
+
+  height:230px;
+  width: 390px;
+  background:white;
+  text-align:center;
+  margin:auto;
+
+}
+
+.picture-row{
+
+height:125px;
+background: orange;
+width:390px;
+margin:auto;
+padding:0px;
+}
+
+.picture-row img{
+
+height:125px;
+background: orange;
+width:125px;
+margin:auto;
+padding:0px;
+margin-top:0px;
+border-radius:150px;
+display:inline-block;
+float:left;
+}
+
+.addVirtue-btn{
+  background-color:grey;
+  width:132px;
+  height: 35px;
+  display: inline-block;
+  border-right-radius:150px;
+  margin-top:37px;
+  text-align: center;
+  padding-top:15px;
+  float:left;
+}
+
+.follow-btn{
+  background-color:grey;
+  width:133px;
+  height: 35px;
+  display: inline-block;
+  margin-top:37px;
+  margin-right:0px;
+  padding-top:15px;
+  text-align: center;
+  border-radius: 0px 0px 100px 0px / 0px 100px 0px 0px;
+  float:left;
+}
+.user-name{
+
+  height:70px;
+  width: 390px;
+  background:white;
+  text-align:center;
+  margin:auto;
+  color:black;
+
+}

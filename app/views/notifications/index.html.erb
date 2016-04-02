@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+
+<div id="notifications">
+
+     <div class="row text-center">
+
+        <% @notifications.each do |t| %>
+
+
+        <div class="col-md-6">
+
+            <div class="profile-picture">
+
+              <%= image_tag (t.image.url(:thumb)) %>
+
+            </div></br>
+              <%= t.title %></br>
+              <%= t.subtitle %>
+
+
+          </div>
+
+        <% end %>
+      </div>
+
+    </div>
+
+
+
+
+</html>
