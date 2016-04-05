@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331193817) do
+ActiveRecord::Schema.define(version: 20160404224724) do
 
   create_table "advises", force: :cascade do |t|
-    t.integer  "gives_advice_to",      limit: 4, null: false
-    t.integer  "receives_advice_from", limit: 4, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "gives_advice_to",      limit: 4,     null: false
+    t.integer  "receives_advice_from", limit: 4,     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.text     "advise",               limit: 65535
   end
 
   create_table "affinities", force: :cascade do |t|
@@ -29,8 +30,9 @@ ActiveRecord::Schema.define(version: 20160331193817) do
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "post_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "commentary", limit: 65535
   end
 
   create_table "endorsements", force: :cascade do |t|
@@ -45,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160331193817) do
     t.integer  "endorsement_id", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "weight",         limit: 4
   end
 
   create_table "follows", force: :cascade do |t|
@@ -53,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160331193817) do
     t.integer  "affinity_id", limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "weight",      limit: 4
   end
 
   create_table "likes", force: :cascade do |t|
@@ -87,6 +91,8 @@ ActiveRecord::Schema.define(version: 20160331193817) do
     t.datetime "image_updated_at"
     t.integer  "post_type",          limit: 4
     t.boolean  "shared_post"
+    t.string   "person_sharing",     limit: 255
+    t.integer  "person_sharing_id",  limit: 4
   end
 
   create_table "privacies", force: :cascade do |t|
@@ -124,6 +130,12 @@ ActiveRecord::Schema.define(version: 20160331193817) do
     t.string   "profile_picture_content_type", limit: 255
     t.integer  "profile_picture_file_size",    limit: 4
     t.datetime "profile_picture_updated_at"
+    t.string   "city",                         limit: 255
+    t.string   "country",                      limit: 255
+    t.string   "job_title",                    limit: 255
+    t.string   "company_name",                 limit: 255
+    t.boolean  "active_location"
+    t.boolean  "private_advise"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -21,6 +21,13 @@ development:
   <<: *default
   database: qbe_development
 
+#  development:
+#  adapter: postgresql
+#  host: localhost
+#  username: root
+#  password: cachirula
+#  database: qbe_development
+
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
@@ -50,5 +57,8 @@ test:
 production:
   <<: *default
   database: qbe_production
-  username: qbe
+  username: root
   password: <%= ENV['QBE_DATABASE_PASSWORD'] %>
+
+
+
