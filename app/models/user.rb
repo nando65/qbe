@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :comments
 
+
   has_many :endorses_endorser, foreign_key: :subject_id, class_name: 'Endorse'
   has_many :endorses_endorsee, foreign_key: :follower_id, class_name: 'Endorse'
 
@@ -47,12 +48,9 @@ class User < ActiveRecord::Base
 
   def search_by_many_attributes(search_query)
 
-     by_first_name = User.where(["first_name LIKE ?","#{search_query}%"]).map{|u| u.id}
-     by_last_name = User.where(["last_name LIKE ?","#{search_query}%"]).map{|u| u.id}
-     by_city = User.where(["city LIKE ?","#{search_query}%"]).map{|u| u.id}
-     by_country = User.where(["country LIKE ?","#{search_query}%"]).map{|u| u.id}
-     by_endorsement = Endorsement.where(["name LIKE ?","#{search_query}%"]).map{|u| u.id}
-     search_results_array = [by_first_name, by_last_name, by_city, by_country, by_endorsement]
+     by_first_name = User.joins(:endorsement_endorsers).where(["first_name LIKE ? OR last_name LIKE ? OR city LIKE ? OR country LIKE ? OR name LIKE ?","%#{search_query}%","%#{search_query}%","%#{search_query}%","%#{search_query}%","%#{search_query}%"])
+     by_endorsement = Endorsement.where(["","#{search_query}%"]).map{|u| u.id}
+     search_results_array = [by_first_name, by_endorsement]
 
   end
 
@@ -64,7 +62,6 @@ class User < ActiveRecord::Base
       u.first.affinity_id
     end
   end
-
 
   def feed(page, per)
    raw_feed.page(page).per(per)
@@ -85,6 +82,15 @@ class User < ActiveRecord::Base
   advises.page(page).per(per)
   end
 
+  def list_attributes(page, per) #funciona en la consola falta probar paginacion, evaluar poner self.
+
+    # endorsement_ids = "SELECT endorsement_id FROM endorses
+    #                     WHERE follower_id = #{user_id}"
+    # Endorsement.where("id IN (#{endorsement_ids})").page(page).per(per)
+
+    endorsement_endorsers
+
+end
 
   def display_following(user_id, page, per)
     following_ids = "SELECT subject_id FROM follows
@@ -111,7 +117,7 @@ class User < ActiveRecord::Base
 
   # Returns true if the current user is following the other user.
   def following?(other_user)
-    following.include?(other_user)
+    following.where( id: other_user ).length > 0
   end
 
   def edit_user_details(user_id, job_title, company_name)

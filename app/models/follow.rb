@@ -4,7 +4,7 @@ class Follow < ActiveRecord::Base
   belongs_to :follower, foreign_key: :follower_id, class_name: 'User'
   belongs_to :affinity
 
-  #after_create :create_notification
+  after_create :create_notification
 
   def self.follow(subject,follower, accepted, affinity)
 
@@ -39,7 +39,7 @@ class Follow < ActiveRecord::Base
     notification.title = self.follower.first_name+" "+self.follower.last_name
     notification.subtitle = "Is now following you"
     notification.image = self.follower.profile_picture
-    notification.type = 1
+    notification.notification_type = 1
     notification.save
 
   end

@@ -2,51 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.row{
-  width: 390px;
-  margin:auto;
-  padding:0px;
 
-}
 
-.row div:nth-child(even){
-  background-color: #FFFFFF;
-  height: 50px;
-  font-family: 'Gotham';
-  font-size: 12px;
-  padding-top: 0px;
 
-}
-
-.row div:nth-child(2n+1){
-  background: rgb(236,245,245);
-  height: 50px;
-  font-family: 'Gotham';
-  font-size: 12px;
-  padding-top: 0px;
-
-}
-
-.profile-picture{
-margin: 0px;
-padding: 0px;
-position: relative;
-float: left;
-display: inline-block;
-margin-left: 10px;
-margin-right: 10px;
-padding-top: 15px;
-background: transparent !important;
-
-}
-
-.profile-picture img{
-
-width: 35px;
-height: 35px;
-border-radius: 150px;
-margin: 0px;
-padding: 0px;
-padding-top:7px;
-}
 

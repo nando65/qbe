@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<div class="account_box">
+  <div class="account_word">
+    Account
+  </div><!--account word-->
+</div><!-- account box -->
+<div class="edit_profile_container">
+    <div class="profile_image">
+      <%=link_to(image_tag(@user.profile_picture.url(:thumb))) %>
+    </div><!-- profile image -->
+    <div class="user_details">
+      <%= @user.first_name %> <%= @user.last_name %>
+      <%=simple_form_for(@user,  url: {action: "update", id: @user.id}, method: :post, html: { class: 'form-horizontal' }) do |f|%>
+          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "" %></br>
+          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: '' %></br>
+          <%= f.submit "Update", class: "btn-update-details"  %>
+        <% end %>
+
+    </div> <!--user details -->
+  </div><!-- edit profile container -->
+  <div class="account_box">
+  <div class="account_word">
+    Support
+  </div><!--account word-->
+</div><!-- account box -->
+<div class="support_buttons">
+   <a href="#" class="support_one_button">Report a problem</a>
+   <a href="#" class="support_one_button">Privacy Policy</a>
+   <a href="#" class="support_one_button">Terms of Service</a></br></br>
+   <a href="#" class="support_one_button">Log out</a>
+  </div><!--support one button-->
+  </div><!-- support buttons -->
+
+</html>

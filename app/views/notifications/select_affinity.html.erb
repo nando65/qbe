@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <div class="affinity_container">
+      <div class="affinity_introduction">
+        <%= current_user.first_name %> <%=current_user.last_name %> belongs to which of your following circles of affinity???
+      </div><!--affinity intro -->
+      <% @affinity.each do |a| %>
+        <a href="#" class="affinity_button">
+          <div class="affinity_number">
+            <%= a.level %>
+          </div><!--affinity number-->
+         <div class="affinity_text"><%= a.affinity_description %></div>
+         </a><!--affinity button -->
+         <% end %>
+    </div><!-- affinity container -->
+</html>

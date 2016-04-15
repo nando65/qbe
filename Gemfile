@@ -56,5 +56,15 @@ gem 'simple_form'
 
 gem 'kaminari'
 
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+gem "font-awesome-rails"
+
+gem 'bootstrap_form'
+
+gem "bootstrap-switch-rails"
 
 
+gem 'simple_form'
+gem 'bootstrap-kaminari-views'

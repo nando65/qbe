@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Qbe</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Qbe</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-<%= yield %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link rel="icon" type="image/png" href="<%= image_path('qbe_favicon.png') %>">
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="<%= controller_name %>-<%= action_name %>">
+    <div id="main-wrapper">
+      <div id="header-wrapper">
+        <div id="header">
+          <%= link_to(image_tag('logo_qbe.svg'), {controller: '/home', action: :index}, id: 'logo') %>
 
-</body>
+            <%= link_to(image_tag('world.svg'), '/', id: 'world_image') %>
+            <select class="form-control" id="select2">
+                      <option value="1">Cats</option>
+                      <option value="2">Dogs</option>
+                      <option value="3">Fish</option>
+                      <option value="4">Reptiles</option>
+                      <option value="5">Equine</option>
+                      <option value="6">Aviary</option>
+                      <option value="7">Insects</option>
+            </select>
+            <%= link_to(image_tag('notification_bubble.svg'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
+             <%= link_to(current_user.first_name,{controller: '/profile', action: :edit_user} , id:'user_name')  %>
+
+      </div> <!-- header -->
+</div> <!-- header wrapper-->
+
+        <span class="clearer"></span>
+       </div><!--main wrapper -->
+      <div id="content-wrapper">
+        <div class="col-md-4 col-md-offset-4">
+        <%= yield %>
+        </div><!--col md 4-->
+      </div>
+      <div id="footer-wrapper">
+      </div>
+    </div>
+  </body>
 </html>

@@ -12,12 +12,12 @@ class Like < ActiveRecord::Base
    notification.title = self.user.first_name + " " + self.user.last_name
    notification.subtitle = "Has liked your post"
    notification.image = self.user.profile_picture
-   notification.type = 5
+   notification.notification_type = 5
    notification.save
 
   end
 
-  def self.like(user,post)
+  def self.like(post,user)
 
     Like.where(:user_id => user, :post_id => post).first_or_create(:user_id => user, :post_id => post)
 

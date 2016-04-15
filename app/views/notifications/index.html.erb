@@ -1,33 +1,24 @@
 <!DOCTYPE html>
 <html>
-
-
 <div id="notifications">
-
-     <div class="row text-center">
-
-        <% @notifications.each do |t| %>
-
-
-        <div class="col-md-6">
-
-            <div class="profile-picture">
-
-              <%= image_tag (t.image.url(:thumb)) %>
-
-            </div></br>
-              <%= t.title %></br>
-              <%= t.subtitle %>
-
-
-          </div>
-
-        <% end %>
-      </div>
-
-    </div>
-
-
-
-
+    <div class="row">
+      <% @notifications.each do |t| %>
+      <div class="col-md-12">
+              <div class="profile-picture">
+                <%= image_tag (t.image.url(:thumb)) %>
+              </div><!--profile picture-->
+              <div class="title-subtitle">
+                <%= t.title %>
+              </br>
+                <%= t.subtitle %>
+              </div><!--title-subtitle-->
+              <div class="notification_right">
+                <a href="#"><i class="fa fa-times-circle fa-3x" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-check-circle fa-3x" aria-hidden="true"></i></a>
+              </div><!-- notification right -->
+       </div><!--col-md-->
+      <% end %><!--notifications each-->
+      <%= paginate @notifications, theme: 'twitter-bootstrap-3' %>
+    </div><!--row-->
+  </div><!--notifications-->
 </html>

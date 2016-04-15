@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Qbe</title>
+    <link rel="import" href="/polymer_components/paper-input/paper-input.html">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link rel="icon" type="image/png" href="<%= image_path('qbe_favicon.png') %>">
+
+      <meta name="description" content="Qbe es el nuevo linkedin pero repotenciado. Ahora los endorsements son mas realisticos y dicen mas de ti y tus amigos" />
+    <meta name="viewport" content="width=device-width">
+  </head>
+<body class="home_body">
+<div class="home">
+
+     <%= image_tag('logo_qbe.svg') %>
+     <div class="raya_login">
+     </div><!--raya login-->
+     <div class="login_box">
+        LOG IN
+     </div><!--login box-->
+     <div class="raya_login">
+     </div><!--raya login-->
+     <%= link_to(fa_stacked_icon "facebook", class: "fa-3x") %>
+     <%= link_to(fa_stacked_icon "linkedin", class: "fa-3x")%>
+     <div class="forabetteryou_box">
+        FOR A BETTER YOU
+     </div><!--for a better you-->
+  </div><!--home-->
+  </body><!-- body home -->
+  </html>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404224724) do
+ActiveRecord::Schema.define(version: 20160414132343) do
 
   create_table "advises", force: :cascade do |t|
     t.integer  "gives_advice_to",      limit: 4,     null: false
@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(version: 20160404224724) do
   end
 
   create_table "affinities", force: :cascade do |t|
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "level",      limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "level",                limit: 4
+    t.text     "affinity_description", limit: 65535
   end
 
   create_table "comments", force: :cascade do |t|

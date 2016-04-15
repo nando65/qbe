@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
 
-match':controller(/:action(:/id))', :via => :get
-#match'avisos/index/:id', to: 'notifications#index', :via => :get
+resources :comments
+
+match 'profile/update/:id', to: 'profile#update', :via => [:post]
+match 'home/login', to: 'home#login_page', :via => [:post, :get]
+match ':controller(/:action(:/id))', :via => :get
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'notifications#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

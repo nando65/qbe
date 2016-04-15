@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<div id="posts">
+    <div class="row">
+      <% @posts.each do |t| %>
+      <div class="col-md-12">
+              <div class="profile-picture">
+                <%= image_tag (t.user.profile_picture.url(:thumb)) %>
+              </div><!--profile picture-->
+              <div class="title-subtitle">
+                <%= t.title %>
+              </br>
+                <%= t.subtitle %>
+              </br>
+                    <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe, {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <button class="comment_btn" data-toggle="modal" data-target="#post-modal-<%= t.id %>">
+                        <i class="fa fa-comment-o" aria-hidden="true"> Comment</i>
+                    </button>
+                    <%= link_to '<i class="fa fa-share" aria-hidden="true"> Share</i>'.html_safe, {:action => "create_share", :post_id => t.id, :current_user_id => current_user.id} %>
+                </div><!--title-subtitle-->
+
+                    <!-- Modal -->
+                    <%= form_for(@comment) do |c| %>
+                    <span class="modal fade" id="post-modal-<%= t.id %>" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                        <div class="col-sm-10">
+                                            <%= c.hidden_field :user_id, :value => current_user.id %>
+                                            <%= c.hidden_field :post_id, :value => t.id %>
+                                            <%= c.text_area :commentary, class: "post_control comment_commentary" %>
+                                        </div>
+                                </div>
+                                <!-- Modal Footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">
+                                                Close
+                                    </button>
+                                    <%= submit_tag "Send Comment", class:"btn btn-primary" %>
+                                </div>
+                    </span>
+                    <%end%>
+
+                    <span class="comments">
+                      <% t.comments.each do |d| %>
+                    <div class="col-md-12">
+                            <div class="profile-picture">
+                              <%= image_tag (d.user.profile_picture.url(:thumb)) %>
+                            </div><!--profile picture-->
+                            <div class="title-subtitle">
+                              <%= d.user.first_name %> <%= d.user.last_name %>
+                            </br>
+                              <%= d.commentary %>
+                            </br>
+                                  <a href="#"><i class="fa fa-check" aria-hidden="true"> Like</i></a>
+                            </div><!--title-subtitle-->
+
+                    </div>
+                    <%end%>
+                    </span>
+
+
+       </div><!--col-md-->
+      <% end %><!--posts each-->
+    </div><!--row-->
+  </div><!--posts-->
+</html>
