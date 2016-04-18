@@ -55,17 +55,12 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 
-production:
-  adapter: postgresql
-  database: qbe_production
-  pool: 5
-  timeout: 5000
 
-# production:
-#   <<: *default
-#   database: qbe_production
-#   username: root
-#   password: <%= ENV['QBE_DATABASE_PASSWORD'] %>
+production:
+  <<: *default
+  database: qbe_production
+  username: root
+  password: <%= ENV['QBE_DATABASE_PASSWORD'] %>
 
 
 
