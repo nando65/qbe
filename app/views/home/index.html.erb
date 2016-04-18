@@ -13,6 +13,10 @@
                 <%= t.subtitle %>
               </br>
                     <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe, {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <%= link_to "comments", '#', id: "comments-link" %>
+                    <section id="comments-section">
+                     <%= render partial: '/comment/post_form', locals: {comment: @comment, t: t} %>
+                    </section>
                     <button class="comment_btn" data-toggle="modal" data-target="#post-modal-<%= t.id %>">
                         <i class="fa fa-comment-o" aria-hidden="true"> Comment</i>
                     </button>

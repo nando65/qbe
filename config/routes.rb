@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
-
+#devise_for :users
+devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 resources :comments
+resources :advises
 
 match 'profile/update/:id', to: 'profile#update', :via => [:post]
-match 'home/login', to: 'home#login_page', :via => [:post, :get]
+
+
+match 'login/', to: 'login#login_page', :via => [:post, :get]
 match ':controller(/:action(:/id))', :via => :get
 
 

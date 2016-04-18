@@ -14,7 +14,6 @@
   </head>
 <body class="home_body">
 <div class="home">
-
      <%= image_tag('logo_qbe.svg') %>
      <div class="raya_login">
      </div><!--raya login-->
@@ -23,8 +22,11 @@
      </div><!--login box-->
      <div class="raya_login">
      </div><!--raya login-->
-     <%= link_to(fa_stacked_icon "facebook", class: "fa-3x") %>
-     <%= link_to(fa_stacked_icon "linkedin", class: "fa-3x")%>
+
+     <%= link_to('<i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i>'.html_safe, omniauth_authorize_path(:user, :facebook))  %>
+
+
+     <!--<%= link_to(fa_stacked_icon "linkedin", class: "fa-3x")%>-->
      <div class="forabetteryou_box">
         FOR A BETTER YOU
      </div><!--for a better you-->

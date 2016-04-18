@@ -1,22 +1,28 @@
 class ProfileController < ApplicationController
 
   def index
-    @user = current_user
+    @user = User.find_by(id:1)
     @advices = current_user.advises_display(0,10)
-    @create_advice = Advise.new
+    @advise = Advise.new
   end
 
   def edit_user
-    @user = User.find_by(current_user.id)
+    @user = User.find_by(id: current_user.id)
   end
 
   def update
-    @user = User.find_by(current_user.id)
+    @user = User.find_by(id: current_user.id)
     if @user.update user_params
       redirect_to action: :edit_user
     else
       render :edit_user
     end
+  end
+
+  def create_follow
+
+    Follow.follow(params[:subject], params[:follower])
+    redirect_to :controller => 'home', :action => 'index'
   end
 
 

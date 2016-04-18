@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
 
-  layout 'qbe_frontend', :only => [:login_page]
-
   def index
+
     @posts = current_user.feed(0,10)
     @comment = Comment.new
+    @comments = Comment.all
   end
 
   def create_share

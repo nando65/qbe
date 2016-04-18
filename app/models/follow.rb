@@ -6,12 +6,13 @@ class Follow < ActiveRecord::Base
 
   after_create :create_notification
 
-  def self.follow(subject,follower, accepted, affinity)
+  def self.follow(subject, follower)
 
-    follow.subject = subject
-    follow.follower = follower
-    follow.accepted = accepted #falta evaluar este caso! No se como manejar el tema de los approvals
-    follow.affinity = affinity
+    Follow.where(:subject_id => subject, :follower_id => follower).first_or_create(:subject_id => subject, :follower_id => follower)
+    #follow.subject_id = receives
+    #follow.follower_id = does
+    #follow.accepted = accepted #falta evaluar este caso! No se como manejar el tema de los approvals
+    #follow.affinity_id = affinity
 
   end
 
@@ -32,7 +33,7 @@ class Follow < ActiveRecord::Base
 
   end
 
-  def create_notifcation
+  def create_notification
 
     notification = Notification.new
     notification.user = self.subject

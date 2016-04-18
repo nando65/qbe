@@ -4,8 +4,15 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use mysql as the database for Active Record
-gem 'mysql2'
 
+group :development do
+  # Use sqlite3 as the database for Active Record
+  gem 'mysql2'
+end
+
+group :production do
+  gem 'pg'
+end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -65,6 +72,11 @@ gem 'bootstrap_form'
 
 gem "bootstrap-switch-rails"
 
+
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'open_uri_redirections'
+gem 'fb_graph'
 
 gem 'simple_form'
 gem 'bootstrap-kaminari-views'

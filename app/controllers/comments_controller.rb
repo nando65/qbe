@@ -6,7 +6,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to :controller => 'home', :action => 'index'
+      # respond_to do |format|
+      # format.html {redirect_to :controller => 'home', :action => 'index'}
+      # format.js
+    #end
+    render partial: '/comment/post_form', locals: {comment: Comment.new, t: @comment.post}
+  else
+    render text: ''
     end
 
   end

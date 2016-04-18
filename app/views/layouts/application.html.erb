@@ -10,6 +10,8 @@
   </head>
   <body class="<%= controller_name %>-<%= action_name %>">
     <div id="main-wrapper">
+
+
       <div id="header-wrapper">
         <div id="header">
           <%= link_to(image_tag('logo_qbe.svg'), {controller: '/home', action: :index}, id: 'logo') %>
@@ -25,7 +27,9 @@
                       <option value="7">Insects</option>
             </select>
             <%= link_to(image_tag('notification_bubble.svg'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
-             <%= link_to(current_user.first_name,{controller: '/profile', action: :edit_user} , id:'user_name')  %>
+            <% if current_user %>
+            <%= link_to(current_user.first_name,{controller: :profile, action: :edit_user} , id:'user_name')  %>
+            <% end %>
 
       </div> <!-- header -->
 </div> <!-- header wrapper-->

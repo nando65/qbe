@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 
+
+  devise :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :trackable, :validatable,
+  :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :advise_advisors, foreign_key: :advisor_id, class_name: 'Advise', dependent: :delete_all
   has_many :advise_subject, foreign_key: :subject_id, class_name: 'Advise', dependent: :delete_all
@@ -45,6 +47,25 @@ class User < ActiveRecord::Base
 
   has_attached_file :profile_picture, styles: { medium: "300x300#", thumb: "100x100#" }
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
+
+  def self.from_omniauth(auth)
+
+    uri = URI.parse(auth.info.image)
+        uri.query = 'type=large'
+
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+
+        user.first_name = auth.extra.raw_info.first_name
+        user.last_name = auth.extra.raw_info.last_name
+        user.gender = auth.extra.raw_info.gender
+        user.profile_picture = open( uri.to_s, allow_redirections: :safe )
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.city = auth.info.location
+      end
+  end
 
   def search_by_many_attributes(search_query)
 
@@ -148,5 +169,15 @@ end
     self.private_advise = false
     self.save
   end
+
+private
+
+# def self.process_uri(uri)
+#   require 'open-uri'
+#   require 'open_uri_redirections'
+#   open(uri, :allow_redirections => :safe) do |r|
+#     r.base_uri.to_s
+#   end
+# end
 
 end

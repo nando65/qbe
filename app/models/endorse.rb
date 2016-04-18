@@ -12,7 +12,13 @@ def no_more_than_five
   end
 end
 def set_weight
-  self.weight = self.endorser.return_affinity_level(self.endorsee)
+  if self.endorser.return_affinity_level(self.endorsee) == 1
+  self.weight = 3
+  elsif self.endorser.return_affinity_level(self.endorsee) == 2
+    self.weight = 2
+  elsif self.endorser.return_affinity_level(self.endorsee) ==3
+    self.weight = 1
+  end
 end
 after_create :create_notification
 
@@ -34,13 +40,14 @@ def create_post
     post.save
 end
 
-def create_notifcation
+def create_notification
     notification = Notification.new
     notification.user = self.endorsee
     notification.title = self.endorser.first_name+" "+self.endorser.last_name
     notification.subtitle = "Has endorsed you for "+ self.endorsement.name
     notification.image = self.endorser.profile_picture
     notification.notification_type = 4
+    notification.endorse_weight = self.set_weight
     notification.save
   end
 end

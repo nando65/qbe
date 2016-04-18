@@ -1,0 +1,14 @@
+ <%= form_for(comment, remote: true, id: 'qwe') do |c| %>
+                      <fieldset>
+                        <ul>
+                          <li>
+                            <%= c.hidden_field :user_id, :value => current_user.id %>
+                            <%= c.hidden_field :post_id, :value => t.id %>
+                            <%= c.text_area :commentary, class: "post_control comment_commentary" %>
+                          </li>
+                          <li>
+                              <%= c.submit 'Post Comment', class: 'button' %>
+                          </li>
+                        </ul>
+                      </fieldset>
+<%end%>

@@ -12,8 +12,8 @@
     <div class="user_details">
       <%= @user.first_name %> <%= @user.last_name %>
       <%=simple_form_for(@user,  url: {action: "update", id: @user.id}, method: :post, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "" %></br>
-          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: '' %></br>
+          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: @user.job_title %></br>
+          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: @user.company_name %></br>
           <%= f.submit "Update", class: "btn-update-details"  %>
         <% end %>
 
@@ -28,7 +28,9 @@
    <a href="#" class="support_one_button">Report a problem</a>
    <a href="#" class="support_one_button">Privacy Policy</a>
    <a href="#" class="support_one_button">Terms of Service</a></br></br>
-   <a href="#" class="support_one_button">Log out</a>
+   <div class="support_one_button">
+    <%= link_to('Log out', destroy_user_session_path, :method => :delete) %>
+  </div>
   </div><!--support one button-->
   </div><!-- support buttons -->
 

@@ -12,10 +12,16 @@
               </br>
                 <%= t.subtitle %>
               </div><!--title-subtitle-->
+              <% if t.notification_type == 1 %>
               <div class="notification_right">
                 <a href="#"><i class="fa fa-times-circle fa-3x" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-check-circle fa-3x" aria-hidden="true"></i></a>
               </div><!-- notification right -->
+              <% elsif t.notification_type == 4 %>
+              <div class="notification_right">
+                <div class="endorsement_weight">+<%= t.endorse_weight%></div>
+              </div><!-- notification right -->
+              <% end %>
        </div><!--col-md-->
       <% end %><!--notifications each-->
       <%= paginate @notifications, theme: 'twitter-bootstrap-3' %>

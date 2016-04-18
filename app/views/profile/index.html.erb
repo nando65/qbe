@@ -13,19 +13,22 @@
       <% end %>
     </div>
     <div class="picture-row">
-          <a href="#" id="addVirtue-btn">Add Virtue<%= image_tag ('lupa_qbe.jpg') %></a>
+          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <a href="#" class="follow-btn">+Follow</a>
+                  <%= link_to "+Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     </div>
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
       <%= @user.job_title %></br>
       @<%= @user.company_name %>
     </div>
-        <%=simple_form_for(@create_advice,  url: {action: "create"}, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :gives_advice_to, hide_label: true, class: 'form_advice', placeholder: "Give me some advice" %>
-          <%= f.submit "Send", class: "btn-send-advice"  %>
+        <%= form_for(@advise, remote: true) do |c| %>
+        <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
+        <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
+        <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
+        <%= submit_tag "Send", class:"btn-send-advice" %>
         <% end %>
+
 
         <div class="advice">
             <div class="some-advice">
@@ -50,7 +53,7 @@
               <% end %><!--notifications each-->
             </div><!--row-->
         </div><!-- advice -->
-  <% elsif !current_user.nil? && current_user.following?(@user.id) %>
+  <% elsif !current_user.nil? && current_user.following?(current_user.id) %>
 
     <div class="attributes-display">
       <% @user.list_attributes(0,10).each do |a| %>
@@ -58,18 +61,20 @@
       <% end %>
     </div>
     <div class="picture-row">
-          <a href="#" id="addVirtue-btn-naranja">Add Virtue<%= image_tag ('lupa_qbe.jpg') %></a>
+          <a href="#" id="addVirtue-btn-naranja">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <a href="#" class="follow-btn-naranja">+Follow</a>
+         <%= link_to "-Unfollow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
     </div>
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
       <%= @user.job_title %></br>
       @<%= @user.company_name %>
     </div>
-        <%=simple_form_for(@create_advice,  url: {action: "create"}, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :gives_advice_to, hide_label: true, class: 'form_advice', placeholder: "Give me some advice" %>
-          <%= f.submit "Send", class: "btn-send-advice"  %>
+        <%= form_for(@advise, remote: true) do |c| %>
+        <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
+        <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
+        <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
+        <%= submit_tag "Send", class:"btn-send-advice" %>
         <% end %>
         <% if @user.private_advise==0 %>
         <div class="advice">
@@ -101,18 +106,20 @@
       <% end %>
     </div>
     <div class="picture-row">
-          <a href="#" id="addVirtue-btn">Add Virtue<%= image_tag ('lupa_qbe.jpg') %></a>
+          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <a href="#" class="follow-btn">+Follow</a>
+         <%= link_to "+Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     </div>
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
       <%= @user.job_title %></br>
       @<%= @user.company_name %>
     </div>
-        <%=simple_form_for(@create_advice,  url: {action: "create"}, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :gives_advice_to, hide_label: true, class: 'form_advice', placeholder: "Give me some advice" %>
-          <%= f.submit "Send", class: "btn-send-advice"  %>
+        <%= form_for(@advise, remote: true) do |c| %>
+        <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
+        <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
+        <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
+        <%= submit_tag "Send", class:"btn-send-advice" %>
         <% end %>
         <% if @user.private_advise==0 %>
         <div class="advice">
