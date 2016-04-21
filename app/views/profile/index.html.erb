@@ -13,9 +13,9 @@
       <% end %>
     </div>
     <div class="picture-row">
-          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></a>
+          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-                  <%= link_to "+Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
+         <%= link_to "Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     </div>
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
@@ -53,7 +53,7 @@
               <% end %><!--notifications each-->
             </div><!--row-->
         </div><!-- advice -->
-  <% elsif !current_user.nil? && current_user.following?(current_user.id) %>
+  <% elsif !current_user.nil? && current_user.following?(@user.id) %>
 
     <div class="attributes-display">
       <% @user.list_attributes(0,10).each do |a| %>
@@ -63,7 +63,7 @@
     <div class="picture-row">
           <a href="#" id="addVirtue-btn-naranja">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "-Unfollow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
+         <%= link_to "-Unfollow", {:action => "destroy_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
     </div>
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
@@ -99,14 +99,13 @@
         </div><!-- advice -->
         <%end%>
   <% else %>
-
-      <div class="attributes-display">
+<div class="attributes-display">
       <% @user.list_attributes(0,10).each do |a| %>
         <%= a.name %>
       <% end %>
     </div>
     <div class="picture-row">
-          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></a>
+          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
          <%= link_to "+Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     </div>

@@ -78,5 +78,7 @@ gem 'omniauth-facebook'
 gem 'open_uri_redirections'
 gem 'fb_graph'
 
-gem 'simple_form'
+gem "heroku"
+
+
 gem 'bootstrap-kaminari-views'

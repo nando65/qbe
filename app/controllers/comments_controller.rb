@@ -6,26 +6,20 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      # respond_to do |format|
-      # format.html {redirect_to :controller => 'home', :action => 'index'}
-      # format.js
-    #end
-    render partial: '/comment/post_form', locals: {comment: Comment.new, t: @comment.post}
-  else
-    render text: ''
+       # respond_to do |format|
+       # format.html {redirect_to :controller => 'home', :action => 'index'}
+       # format.js
+       #  end
+    #render '/comments/create', locals: { t: @comment.post}
+    render json:{ result: :success, data: render_to_string( partial: '/comments/comment', locals: {d: @comment} ) }
+    else
+    render json:{ result: :error, data: @comment.errors.full_messages.first }
     end
 
   end
 
   def update
-    @user = User.find_by(current_user.id)
-    if @user.update user_params
-      redirect_to action: :edit_user
-    else
-      render :edit_user
-    end
   end
-
 
   private
 

@@ -1,72 +1,76 @@
 <!DOCTYPE html>
 <html>
 <div id="posts">
+
     <div class="row">
-      <% @posts.each do |t| %>
-      <div class="col-md-12">
+      <% if @posts.nil? %>
+        <% @last_users.each do |t| %>
+          <div class="col-md-12">
               <div class="profile-picture">
-                <%= image_tag (t.user.profile_picture.url(:thumb)) %>
+                <%= image_tag (t.profile_picture.url(:thumb)) %>
               </div><!--profile picture-->
               <div class="title-subtitle">
-                <%= t.title %>
+                <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
+
+              </div>
+              <%= link_to "+Follow", {:controller => "profile", :action => "create_follow", :subject => t.id, :follower => current_user.id},  { :class=>"follow-home" } %>
+          </div>
+        <% end %>
+      <% else %>
+      <% @posts.each do |t| %>
+      <div class="post-body">
+          <% if !t.shared_post %>
+
+                <%= image_tag (t.user.profile_picture.url(:thumb)), class:"profile-picture" %>
+              <div class="title-subtitle">
+                <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
               </br>
                 <%= t.subtitle %>
               </br>
-                    <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe, {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
-                    <%= link_to "comments", '#', id: "comments-link" %>
-                    <section id="comments-section">
-                     <%= render partial: '/comment/post_form', locals: {comment: @comment, t: t} %>
+                    <% if !current_user.nil? && current_user.likes?(t.id) %>
+                    <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <% else %>
+                    <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <% end %>
+                   <%= link_to '<i class="fa fa-comment-o" aria-hidden="true"> Comment</i>'.html_safe,'#', id: "comments-link", class: "comments-link", data: { link:  "#comments-section-" + t.id.to_s } %>
+                   <%= link_to '<i class="fa fa-share" aria-hidden="true"> Share</i>'.html_safe, {:action => "create_share", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <section class="comments-section" id="comments-section-<%= t.id %>">
+                     <%= render partial: '/comments/post_form', locals: {comment: @comment, t: t} %>
                     </section>
-                    <button class="comment_btn" data-toggle="modal" data-target="#post-modal-<%= t.id %>">
-                        <i class="fa fa-comment-o" aria-hidden="true"> Comment</i>
-                    </button>
-                    <%= link_to '<i class="fa fa-share" aria-hidden="true"> Share</i>'.html_safe, {:action => "create_share", :post_id => t.id, :current_user_id => current_user.id} %>
+
                 </div><!--title-subtitle-->
+                <span class="comments">
+                    <%= render partial: '/comments/comments', locals: {t: t} %>
+                </span>
+            <% else %>
+            <div class="person_sharing">
+              <i class="fa fa-retweet" aria-hidden="true"></i> <%= t.person_sharing %>
+            </div>
+                <%= image_tag (t.user.profile_picture.url(:thumb)), class:"profile-picture" %>
+              <div class="title-subtitle">
+                <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
+              </br>
+                <%= t.subtitle %>
+              </br>
+                    <% if !current_user.nil? && current_user.likes?(t.id) %>
+                    <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <% else %>
+                    <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <% end %>
+                   <%= link_to '<i class="fa fa-comment-o" aria-hidden="true"> Comment</i>'.html_safe,'#', id: "comments-link", class: "comments-link", data: { link:  "#comments-section-" + t.id.to_s } %>
+                   <%= link_to '<i class="fa fa-share" aria-hidden="true"> Share</i>'.html_safe, {:action => "create_share", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <section class="comments-section" id="comments-section-<%= t.id %>">
+                     <%= render partial: '/comments/post_form', locals: {comment: @comment, t: t} %>
+                    </section>
 
-                    <!-- Modal -->
-                    <%= form_for(@comment) do |c| %>
-                    <span class="modal fade" id="post-modal-<%= t.id %>" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel" aria-hidden="true">
-                                <!-- Modal Body -->
-                                <div class="modal-body">
-                                        <div class="col-sm-10">
-                                            <%= c.hidden_field :user_id, :value => current_user.id %>
-                                            <%= c.hidden_field :post_id, :value => t.id %>
-                                            <%= c.text_area :commentary, class: "post_control comment_commentary" %>
-                                        </div>
-                                </div>
-                                <!-- Modal Footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">
-                                                Close
-                                    </button>
-                                    <%= submit_tag "Send Comment", class:"btn btn-primary" %>
-                                </div>
-                    </span>
-                    <%end%>
-
-                    <span class="comments">
-                      <% t.comments.each do |d| %>
-                    <div class="col-md-12">
-                            <div class="profile-picture">
-                              <%= image_tag (d.user.profile_picture.url(:thumb)) %>
-                            </div><!--profile picture-->
-                            <div class="title-subtitle">
-                              <%= d.user.first_name %> <%= d.user.last_name %>
-                            </br>
-                              <%= d.commentary %>
-                            </br>
-                                  <a href="#"><i class="fa fa-check" aria-hidden="true"> Like</i></a>
-                            </div><!--title-subtitle-->
-
-                    </div>
-                    <%end%>
-                    </span>
-
-
-       </div><!--col-md-->
+                </div><!--title-subtitle-->
+                <span class="comments">
+                    <%= render partial: '/comments/comments', locals: {t: t} %>
+                </span>
+            <%end%>
+       </div><!--post body-->
       <% end %><!--posts each-->
+      <% end %>
     </div><!--row-->
   </div><!--posts-->
 </html>

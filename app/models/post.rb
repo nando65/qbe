@@ -12,9 +12,10 @@ def self.share_post(post_id, current_user)
 
     u=User.find_by(id: current_user)
     new_post =Post.find_by(id: post_id).dup
+    new_post.original_owner_id = new_post.user_id
+    new_post.user_id = u.id
     new_post.shared_post=1
     new_post.person_sharing = u.first_name+" "+u.last_name
-    new_post.person_sharing_id = u.id
     new_post.save
 
 end

@@ -1,7 +1,7 @@
 class ProfileController < ApplicationController
 
   def index
-    @user = User.find_by(id:1)
+    @user = User.find_by(id: params[:subject])
     @advices = current_user.advises_display(0,10)
     @advise = Advise.new
   end
@@ -21,8 +21,13 @@ class ProfileController < ApplicationController
 
   def create_follow
 
-    Follow.follow(params[:subject], params[:follower])
+    Follow.follow(2, params[:follower])
     redirect_to :controller => 'home', :action => 'index'
+  end
+
+  def destroy_follow
+    Follow.destroy_all(subject_id: params[:subject], follower_id: params[:follower])
+    redirect_to controller: :home, action: :index
   end
 
 

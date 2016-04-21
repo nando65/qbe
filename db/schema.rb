@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418022510) do
+ActiveRecord::Schema.define(version: 20160420023847) do
 
   create_table "advises", force: :cascade do |t|
     t.integer  "gives_advice_to",      limit: 4,     null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160418022510) do
     t.integer  "post_id",    limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "comment_id", limit: 4
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -79,22 +80,26 @@ ActiveRecord::Schema.define(version: 20160418022510) do
     t.datetime "image_updated_at"
     t.integer  "notification_type",  limit: 4
     t.integer  "endorse_weight",     limit: 4
+    t.integer  "follower_id",        limit: 4
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "user_id",            limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "title",              limit: 255
-    t.string   "subtitle",           limit: 255
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_file_size",    limit: 4
+    t.integer  "user_id",             limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "title",               limit: 255
+    t.string   "subtitle",            limit: 255
+    t.string   "image_file_name",     limit: 255
+    t.string   "image_content_type",  limit: 255
+    t.integer  "image_file_size",     limit: 4
     t.datetime "image_updated_at"
-    t.integer  "post_type",          limit: 4
+    t.integer  "post_type",           limit: 4
     t.boolean  "shared_post"
-    t.string   "person_sharing",     limit: 255
-    t.integer  "person_sharing_id",  limit: 4
+    t.string   "person_sharing",      limit: 255
+    t.integer  "person_sharing_id",   limit: 4
+    t.integer  "follower_id",         limit: 4
+    t.integer  "original_owner_id",   limit: 4
+    t.string   "original_owner_name", limit: 255
   end
 
   create_table "privacies", force: :cascade do |t|

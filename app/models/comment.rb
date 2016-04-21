@@ -2,8 +2,9 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :post
+  has_many :likes
 
-after_create :create_notification
+#after_create :create_notification
 
   def comment(user_id, post_id, comment)
     Comment.create user_id: user_id, post_id: post_id, commentary: comment
@@ -22,6 +23,7 @@ after_create :create_notification
     notification.subtitle = "Is now following you"
     notification.image = self.user.profile_picture
     notification.notification_type = 3
+    notification.follower_id = current_user.id
     notification.save
 
   end

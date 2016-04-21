@@ -37,6 +37,7 @@ def create_post
     post.title = self.endorsee.first_name+" "+self.endorser.last_name
     post.subtitle = "Has endorsed "+self.subject+" for "+self.endorsement
     post.image = self.endorser.profile_picture
+    post.follower_id = self.endorser.id
     post.save
 end
 
@@ -48,6 +49,7 @@ def create_notification
     notification.image = self.endorser.profile_picture
     notification.notification_type = 4
     notification.endorse_weight = self.set_weight
+    notification.follower_id = self.endorser.id
     notification.save
   end
 end

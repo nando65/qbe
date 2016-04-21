@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on "page:change", ->
-  $('#comments-link').click ->
-    $('#comments-section').fadeToggle()
-    $('#comment_commentary').focus()
+  $('.comments-link').click (event) ->
+    event.preventDefault()
+    $( $(this).data('link') ).fadeToggle()
+    $( $(this).data('link') ).find('#comment_commentary').focus()

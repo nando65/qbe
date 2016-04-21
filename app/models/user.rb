@@ -47,6 +47,15 @@ class User < ActiveRecord::Base
 
   has_attached_file :profile_picture, styles: { medium: "300x300#", thumb: "100x100#" }
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
+  after_create :autofollow
+
+  def autofollow
+    f = Follow.new
+    f.follower_id = current_user
+    f.subject_id = current_user
+    f.affinity_id = 1
+    f.save
+  end
 
   def self.from_omniauth(auth)
 
@@ -139,6 +148,14 @@ end
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.where( id: other_user ).length > 0
+  end
+
+  def likes?(post)
+    likes.where(post_id: post).length > 0
+  end
+
+  def likes_comment?(comment)
+    likes.where(comment_id: comment).length > 0
   end
 
   def edit_user_details(user_id, job_title, company_name)

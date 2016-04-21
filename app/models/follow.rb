@@ -28,6 +28,7 @@ class Follow < ActiveRecord::Base
     post.title = self.follower.first_name+" "+self.follower.last_name
     post.subtitle = "Is now following "+self.subject
     post.image = self.follower.profile_picture
+    post.follower_id = self.follower.id
     post.share=0
     post.save
 
@@ -41,6 +42,7 @@ class Follow < ActiveRecord::Base
     notification.subtitle = "Is now following you"
     notification.image = self.follower.profile_picture
     notification.notification_type = 1
+    notification.follower_id = self.follower.id
     notification.save
 
   end
