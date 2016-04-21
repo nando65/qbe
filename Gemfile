@@ -79,6 +79,7 @@ gem 'open_uri_redirections'
 gem 'fb_graph'
 
 gem "heroku"
+gem 'rails_12factor'
 
 
 gem 'bootstrap-kaminari-views'
