@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   #before_filter :check_user_is_active, except: [:login_page]
 
-  before_filter :require_login
+  #before_filter :require_login
 
 private
 
