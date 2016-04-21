@@ -1,5 +1,5 @@
 class AddPictureToNotifications < ActiveRecord::Migration
   def change
-    add_column :notifications, :picture, :longblob
+    add_column :notifications, :picture, :bytea
   end
 end
