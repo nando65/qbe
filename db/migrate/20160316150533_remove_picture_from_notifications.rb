@@ -1,5 +1,5 @@
 class RemovePictureFromNotifications < ActiveRecord::Migration
   def change
-    remove_column :notifications, :picture, :bytea
+    remove_column :notifications, :picture, :longblob
   end
 end
