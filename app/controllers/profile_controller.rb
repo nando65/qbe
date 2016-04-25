@@ -4,6 +4,8 @@ class ProfileController < ApplicationController
     @user = User.find_by(id: params[:subject])
     @advices = current_user.advises_display(0,10)
     @advise = Advise.new
+    @endorse = Endorse.new
+    @endorsements = Endorsement.all
   end
 
   def edit_user

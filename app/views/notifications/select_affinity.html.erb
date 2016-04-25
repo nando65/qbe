@@ -2,15 +2,15 @@
 <html>
     <div class="affinity_container">
       <div class="affinity_introduction">
-        <%= current_user.first_name %> <%=current_user.last_name %> belongs to which of your following circles of affinity???
+        <%= @follower.first_name %> <%=@follower.last_name %> belongs to which of your following circles of affinity???
       </div><!--affinity intro -->
       <% @affinity.each do |a| %>
-        <a href="#" class="affinity_button">
-          <div class="affinity_number">
-            <%= a.level %>
-          </div><!--affinity number-->
-         <div class="affinity_text"><%= a.affinity_description %></div>
-         </a><!--affinity button -->
-         <% end %>
+          <%= link_to :action =>"confirm_follow", :subject_id => @subject, :follower_id => @follower.id, :affinity_id => a.id, :weight => 4-a.id, class: "affinity_button" do%>
+                  <div class="affinity_number">
+                     <%= a.level %>
+                  </div><!--affinity number-->
+                  <div class="affinity_text"><%= a.affinity_description %></div>
+          <% end%><!--affinity button -->
+      <% end %>
     </div><!-- affinity container -->
 </html>

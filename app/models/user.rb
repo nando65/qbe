@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   has_many :receives_advise_from, foreign_key: :advise_advisors, class_name: 'User', source: :advisor
   has_many :gives_advice_to, foreign_key: :advise_subject, class_name: 'User', source: :subject
 
-  has_many :follows_followers, foreign_key: :subject_id, class_name: 'Follow',dependent: :destroy
-  has_many :follows_following, foreign_key: :follower_id, class_name: 'Follow',dependent: :destroy
+  has_many :follows_followers,->{ wait_acceptance}, foreign_key: :subject_id, class_name: 'Follow',dependent: :destroy
+  has_many :follows_following,->{ wait_acceptance}, foreign_key: :follower_id, class_name: 'Follow',dependent: :destroy
 
   has_many :following, through: :follows_following, class_name: 'User', source: :subject
   has_many :followers, through: :follows_followers, class_name: 'User', source: :follower
@@ -47,14 +47,16 @@ class User < ActiveRecord::Base
 
   has_attached_file :profile_picture, styles: { medium: "300x300#", thumb: "100x100#" }
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
-  after_create :autofollow
+   after_create :autofollow
 
   def autofollow
-    f = Follow.new
-    f.follower_id = current_user
-    f.subject_id = current_user
-    f.affinity_id = 1
-    f.save
+
+    self.follow(self.id, self.id, 1)
+    # f = Follow.new
+    # f.follower_id = User.last.id
+    # f.subject_id = User.last.id
+    # f.affinity_id = 1
+    # f.save
   end
 
   def self.from_omniauth(auth)

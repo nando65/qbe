@@ -3,6 +3,7 @@ class Follow < ActiveRecord::Base
   belongs_to :subject, foreign_key: :subject_id, class_name: 'User'
   belongs_to :follower, foreign_key: :follower_id, class_name: 'User'
   belongs_to :affinity
+  scope :wait_acceptance, -> {where ( 'affinity_id is not null')}
 
   after_create :create_notification
 
@@ -17,10 +18,9 @@ class Follow < ActiveRecord::Base
   end
 
   def unfollow(follow_id)
-
     follow_id.destroy
-
   end
+
    def create_post
 
     post = Post.new
@@ -35,7 +35,7 @@ class Follow < ActiveRecord::Base
   end
 
   def create_notification
-
+    if self.follower != self.subject
     notification = Notification.new
     notification.user = self.subject
     notification.title = self.follower.first_name+" "+self.follower.last_name
@@ -44,7 +44,7 @@ class Follow < ActiveRecord::Base
     notification.notification_type = 1
     notification.follower_id = self.follower.id
     notification.save
-
+    end
   end
 
 end

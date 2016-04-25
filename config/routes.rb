@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 #devise_for :users
 devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 resources :comments
+resources :endorses
 resources :advises
+resources :notifications
 
 match 'profile/update/:id', to: 'profile#update', :via => [:post]
 

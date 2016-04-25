@@ -20,7 +20,7 @@ def set_weight
     self.weight = 1
   end
 end
-after_create :create_notification
+#after_create :create_notification
 
 def insert_endorse(subject_id, follower_id, endorsement_id)
     Endorse.create subject_id: subject_id, follower_id: follower_id, endorsement_id: endorsement_id

@@ -18,13 +18,15 @@
 
             <%= link_to(image_tag('world.svg'), '/', id: 'world_image') %>
             <select class="form-control" id="select2">
-                      <option value="1">Cats</option>
+
+                      <option value="1">Fer</option>
                       <option value="2">Dogs</option>
                       <option value="3">Fish</option>
                       <option value="4">Reptiles</option>
                       <option value="5">Equine</option>
                       <option value="6">Aviary</option>
                       <option value="7">Insects</option>
+
             </select>
             <%= link_to(image_tag('notification_bubble.svg'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
             <% if current_user %>
@@ -38,11 +40,14 @@
        </div><!--main wrapper -->
       <div id="content-wrapper">
         <div class="col-md-4 col-md-offset-4">
+
         <%= yield %>
         </div><!--col md 4-->
       </div>
       <div id="footer-wrapper">
       </div>
+       <%= javascript_include_tag "application" %>
+       <%= yield :js %>
     </div>
   </body>
 </html>

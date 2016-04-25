@@ -3,93 +3,62 @@
 <head>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-</head>
 
+</head>
 <div class="profile">
-  <% if !current_user.nil? && current_user.id==@user.id %>
       <div class="attributes-display">
       <% @user.list_attributes(0,10).each do |a| %>
         <%= a.name %>
       <% end %>
     </div>
     <div class="picture-row">
+    <% if !current_user.nil? && current_user.following?(@user.id) %>
+          <%= link_to 'Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "add-virtue-link", class: "addVirtue-btn-naranja", data: { link:  "#add-virtue-section-"} %>
+             <%= image_tag (@user.profile_picture.url(:thumb)) %>
+         <%= link_to "-Unfollow", {:action => "destroy_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
+    <% elsif  !current_user.nil? && current_user.id==@user.id %>
+          <%= image_tag (@user.profile_picture.url(:thumb)), class: "profile_picture_own_account" %>
+    <% else %>
           <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
+         <%= link_to "Follow", {:action => "create_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
+    <% end %>
     </div>
+    <section class="add-virtue-section" id="add-virtue-section">
+        <%= render partial: '/endorse/endorse_form', locals: {endorse: @endorse, t: @user, endorsements: @endorsements} %>
+    </section>
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
       <%= @user.job_title %></br>
       @<%= @user.company_name %>
     </div>
-        <%= form_for(@advise, remote: true) do |c| %>
-        <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
-        <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
-        <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
-        <%= submit_tag "Send", class:"btn-send-advice" %>
+       <% if !current_user.nil? && current_user.following?(@user.id) && current_user.id != @user.id %>
+          <%= form_for(@advise, remote: true) do |c| %>
+          <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
+          <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
+          <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
+          <%= submit_tag "Send", class:"btn-send-advice" %>
+          <% end %>
         <% end %>
-
-
+        <% if @user.private_advise==0 || @user.id == current_user.id %>
         <div class="advice">
             <div class="some-advice">
                 <div class="some-advice-for-you">
                   Some advice for you
                 </div><!-- some advice for you -->
+                <% if !current_user.nil? && current_user.id==@user.id %>
                 <div class="private-advice">
                   <input type="checkbox" checked data-toggle="toggle" data-on="public" data-off="private" data-onstyle="success" data-offstyle="danger" data-width="100" data-height="5">
                 </div><!-- private advice -->
+                <% end %>
             </div><!-- some advice -->
             <div class="row">
               <% @advices.each do |t| %>
               <div class="lineas-intercaladas">
-                      <div class="profile-picture">
+                      <div class="profile-picture-advice">
                         <%= image_tag t.advisor.profile_picture.url(:thumb) %>
                       </div><!--profile picture-->
-                      <div class="title-subtitle">
-                        <%= t.advisor.first_name+" "+t.advisor.last_name %></br>
-                        <%= t.advise %>
-                      </div><!--title-subtitle-->
-               </div><!--lineas-intercaladas-->
-              <% end %><!--notifications each-->
-            </div><!--row-->
-        </div><!-- advice -->
-  <% elsif !current_user.nil? && current_user.following?(@user.id) %>
-
-    <div class="attributes-display">
-      <% @user.list_attributes(0,10).each do |a| %>
-        <%= a.name %>
-      <% end %>
-    </div>
-    <div class="picture-row">
-          <a href="#" id="addVirtue-btn-naranja">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
-             <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "-Unfollow", {:action => "destroy_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
-    </div>
-    <div class="user-name">
-      </br><%= @user.first_name %> <%= @user.last_name %></br>
-      <%= @user.job_title %></br>
-      @<%= @user.company_name %>
-    </div>
-        <%= form_for(@advise, remote: true) do |c| %>
-        <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
-        <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
-        <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
-        <%= submit_tag "Send", class:"btn-send-advice" %>
-        <% end %>
-        <% if @user.private_advise==0 %>
-        <div class="advice">
-            <div class="some-advice">
-                <div class="some-advice-for-you">
-                  Some advice for you
-                </div><!-- some advice for you -->
-            </div><!-- some advice -->
-            <div class="row">
-              <% @advices.each do |t| %>
-              <div class="lineas-intercaladas">
-                      <div class="profile-picture">
-                        <%= image_tag t.advisor.profile_picture.url(:thumb) %>
-                      </div><!--profile picture-->
-                      <div class="title-subtitle">
+                      <div class="title-subtitle-advice">
                         <%= t.advisor.first_name+" "+t.advisor.last_name %></br>
                         <%= t.advise %>
                       </div><!--title-subtitle-->
@@ -98,51 +67,5 @@
             </div><!--row-->
         </div><!-- advice -->
         <%end%>
-  <% else %>
-<div class="attributes-display">
-      <% @user.list_attributes(0,10).each do |a| %>
-        <%= a.name %>
-      <% end %>
-    </div>
-    <div class="picture-row">
-          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
-             <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "+Follow", {:action => "create_follow", :subject => current_user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
-    </div>
-    <div class="user-name">
-      </br><%= @user.first_name %> <%= @user.last_name %></br>
-      <%= @user.job_title %></br>
-      @<%= @user.company_name %>
-    </div>
-        <%= form_for(@advise, remote: true) do |c| %>
-        <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
-        <%= c.hidden_field :receives_advice_from, :value => current_user.id %>
-        <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
-        <%= submit_tag "Send", class:"btn-send-advice" %>
-        <% end %>
-        <% if @user.private_advise==0 %>
-        <div class="advice">
-            <div class="some-advice">
-                <div class="some-advice-for-you">
-                  Some advice for you
-                </div><!-- some advice for you -->
-            </div><!-- some advice -->
-            <div class="row">
-              <% @advices.each do |t| %>
-              <div class="lineas-intercaladas">
-                      <div class="profile-picture">
-                        <%= image_tag t.advisor.profile_picture.url(:thumb) %>
-                      </div><!--profile picture-->
-                      <div class="title-subtitle">
-                        <%= t.advisor.first_name+" "+t.advisor.last_name %></br>
-                        <%= t.advise %>
-                      </div><!--title-subtitle-->
-               </div><!--lineas-intercaladas-->
-              <% end %><!--notifications each-->
-            </div><!--row-->
-        </div><!-- advice -->
-        <%end%>
-  <% end %>
-
 </div>
 </html>

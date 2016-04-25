@@ -83,3 +83,6 @@ gem 'rails_12factor'
 
 
 gem 'bootstrap-kaminari-views'
+
+
+gem "select2-rails"

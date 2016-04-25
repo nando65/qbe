@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require select2
 //= require jquery
 //= require bootstrap-switch
 //= require jquery_ujs
@@ -19,6 +20,8 @@
 //= require_tree .
 
 //Select2
+$(document).ready(function() {
+
 $.getScript('http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js',function(){
 
   /* dropdown and filter select */
@@ -27,4 +30,7 @@ $.getScript('http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js'
 }); //script
 
 
-$(document).ready(function() {});
+});
+
+
+

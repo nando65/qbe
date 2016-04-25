@@ -14,8 +14,8 @@
               </div><!--title-subtitle-->
               <% if t.notification_type == 1 %>
               <div class="notification_right">
-                <a href="#"><i class="fa fa-times-circle fa-3x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-check-circle fa-3x" aria-hidden="true"></i></a>
+                <%= link_to '<i class="fa fa-times-circle fa-3x" aria-hidden="true"></i>'.html_safe,  {:action =>"destroy_follow", :subject_id => t.user_id, :follower_id => t.follower_id, :notification_id => t.id} %>
+                <%= link_to '<i class="fa fa-check-circle fa-3x" aria-hidden="true"></i>'.html_safe,  {:action =>"select_affinity", :subject => t.user, :follower => t.follower_id, :notification_id => t.id} %>
               </div><!-- notification right -->
               <% elsif t.notification_type == 4 %>
               <div class="notification_right">
