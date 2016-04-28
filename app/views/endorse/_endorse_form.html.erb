@@ -1,25 +1,19 @@
 <%= form_for(endorse,id: "add-virtue", remote: true, ) do |c| %>
+
+      <div class="add-virtue-container">
                       <fieldset>
                         <ul style="list-style:none; padding:0px;">
                           <li>
                             <%= c.hidden_field :subject_id, :value => t.id %>
                             <%= c.hidden_field :follower_id, :value => current_user.id %>
-                            <select class="form-control" id="select2">
-                                      <option value="1">Cats</option>
-                                      <option value="2">Dogs</option>
-                                      <option value="3">Fish</option>
-                                      <option value="4">Reptiles</option>
-                                      <option value="5">Equine</option>
-                                      <option value="6">Aviary</option>
-                                      <option value="7">Insects</option>
-                            </select>
-                            <%= c.select :endorsement_id, class:"form-control", placeholder: "Write a virtue..." %>
-                            <%= c.text_area :endorsement_id, class: "post_control endorse_endorsement_id", placeholder: "Write a virtue..." %>
-                            <%= select_tag "endorsement", options_for_select(@endorsements.all.map{|u| u.name}), id: "select2" %>
-                          </li>
-                          <li>
-                              <%= c.submit 'Send', class: 'button' %>
+                            <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+                            <div id="virtue-combobox">
+                            <%=c.select_tag :endorsement_id, options_for_select(@endorsements.all.map { |p| [ p.name, p.id ]  }),name: 'endorse[endorsement_id]', class: "endorsement", :prompt => 'Select Endorsement...'  %>
+
+                              <%= c.submit 'add', class: 'button', style: "background-color:white; color:orange; border:none" %>
+                            </div>
                           </li>
                         </ul>
                       </fieldset>
+      </div><!--add virtue container-->
 <%end%>

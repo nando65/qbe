@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html>
 <div id="posts">
-    <div class="row">
       <% if @posts.nil? %>
+
         <% @last_users.each do |t| %>
-          <div class="col-md-12">
-              <div class="profile-picture">
-                <%= image_tag (t.profile_picture.url(:thumb)) %>
-              </div><!--profile picture-->
-              <div class="title-subtitle">
-                <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
-              </div>
-              <%= link_to "+Follow", {:controller => "profile", :action => "create_follow", :subject => t.id, :follower => current_user.id},  { :class=>"follow-home" } %>
-          </div>
+          <% if Notification.find_by(follower_id: current_user.id, user_id: t.id).nil? && !current_user.following?(t.id)%>
+            <div class="row row-striped">
+            <div class="post-body-home-no-posts">
+                  <div class="profile-picture-home-no-posts">
+                    <%= image_tag (t.profile_picture.url(:thumb)) %>
+                  </div><!--profile picture-->
+                  <div class="title-subtitle">
+                    <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
+                  </div>
+                  <%= link_to "+Follow", {:controller => "profile", :action => "create_follow_request", :subject => t.id, :follower => current_user.id},  { :class=>"follow-home" } %>
+                </div><!--post body-->
+                </div><!--row-->
+          <% end %>
         <% end %>
+
       <% else %>
       <% @posts.each do |t| %>
+      <div class="row row-striped">
       <div class="post-body">
           <% if t.shared_post %>
             <div class="person_sharing">
               <i class="fa fa-retweet" aria-hidden="true"></i> <%=link_to t.person_sharing, :controller => "profile", :action => "index", :subject => t.person_sharing_id %>
             </div>
             <% end %>
+            <% if t.shared_post || !t.shared_post %>
                 <%= image_tag (t.user.profile_picture.url(:thumb)), class:"profile-picture" %>
               <div class="title-subtitle">
                 <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
@@ -31,7 +38,7 @@
                     <% if !current_user.nil? && current_user.likes?(t.id) %>
                     <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like", :post_id => t.id, :current_user_id => current_user.id} %>
                     <% else %>
-          <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
+                    <%= link_to '<i class="fa fa-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like", :post_id => t.id, :current_user_id => current_user.id} %>
                     <% end %>
                    <%= link_to '<i class="fa fa-comment-o" aria-hidden="true"> Comment</i>'.html_safe,'#', id: "comments-link", class: "comments-link", data: { link:  "#comments-section-" + t.id.to_s } %>
                    <%= link_to '<i class="fa fa-share" aria-hidden="true"> Share</i>'.html_safe, {:action => "create_share", :post_id => t.id, :current_user_id => current_user.id} %>
@@ -42,9 +49,11 @@
                 <span class="comments">
                     <%= render partial: '/comments/comments', locals: {t: t} %>
                 </span>
+                <% end %>
        </div><!--post body-->
+      </div><!--row-->
       <% end %><!--posts each-->
+       <%= paginate @posts, theme: 'twitter-bootstrap-3' %>
       <% end %>
-    </div><!--row-->
   </div><!--posts-->
 </html>

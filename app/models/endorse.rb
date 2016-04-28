@@ -4,6 +4,7 @@ class Endorse < ActiveRecord::Base
   belongs_to :endorsement
   before_save :set_weight
   validate :no_more_than_five
+  after_create :create_notification
 
 def no_more_than_five
    if Endorse.where(:endorser => self.endorser, :endorsee => self.endorsee).count > 4
@@ -20,8 +21,6 @@ def set_weight
     self.weight = 1
   end
 end
-#after_create :create_notification
-
 def insert_endorse(subject_id, follower_id, endorsement_id)
     Endorse.create subject_id: subject_id, follower_id: follower_id, endorsement_id: endorsement_id
 end
@@ -40,7 +39,6 @@ def create_post
     post.follower_id = self.endorser.id
     post.save
 end
-
 def create_notification
     notification = Notification.new
     notification.user = self.endorsee
@@ -52,4 +50,6 @@ def create_notification
     notification.follower_id = self.endorser.id
     notification.save
   end
+
+
 end

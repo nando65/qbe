@@ -10,10 +10,11 @@
       <%=link_to(image_tag(@user.profile_picture.url(:thumb))) %>
     </div><!-- profile image -->
     <div class="user_details">
-      <%= @user.first_name %> <%= @user.last_name %>
+      <%= link_to "#{@user.first_name} #{@user.last_name}", :controller => "profile", :action => "index", :subject => @user.id %>
+
       <%=simple_form_for(@user,  url: {action: "update", id: @user.id}, method: :post, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: @user.job_title %></br>
-          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: @user.company_name %></br>
+          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "Current" %></br>
+          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: "Institution/ Company" %></br>
           <%= f.submit "Update", class: "btn-update-details"  %>
         <% end %>
 

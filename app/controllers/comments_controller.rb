@@ -6,11 +6,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-    render json:{ result: :success, data: render_to_string( partial: '/comments/comment', locals: {d: @comment} ) }
+    render json:{ result: :success, data: render_to_string( partial: '/comments/comment', locals: {d: @comment, i: nil} ) }
     else
     render json:{ result: :error, data: @comment.errors.full_messages.first }
     end
-
   end
 
   def update

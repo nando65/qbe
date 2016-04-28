@@ -5,12 +5,15 @@
         <%= @follower.first_name %> <%=@follower.last_name %> belongs to which of your following circles of affinity???
       </div><!--affinity intro -->
       <% @affinity.each do |a| %>
-          <%= link_to :action =>"confirm_follow", :subject_id => @subject, :follower_id => @follower.id, :affinity_id => a.id, :weight => 4-a.id, class: "affinity_button" do%>
+
+          <%= link_to :action =>"create_follow", :subject_id => @subject, :follower_id => @follower.id, :affinity_id => a.id, :weight => 4-a.id, :notification_id => @notification_id, class: "affinity_button" do%>
                   <div class="affinity_number">
                      <%= a.level %>
                   </div><!--affinity number-->
                   <div class="affinity_text"><%= a.affinity_description %></div>
+
           <% end%><!--affinity button -->
+
       <% end %>
     </div><!-- affinity container -->
 </html>

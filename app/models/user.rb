@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:facebook]
 
+  geocoded_by :city
+  after_validation :geocode
+
   has_many :advise_advisors, foreign_key: :advisor_id, class_name: 'Advise', dependent: :delete_all
   has_many :advise_subject, foreign_key: :subject_id, class_name: 'Advise', dependent: :delete_all
 
@@ -114,15 +117,9 @@ class User < ActiveRecord::Base
   advises.page(page).per(per)
   end
 
-  def list_attributes(page, per) #funciona en la consola falta probar paginacion, evaluar poner self.
-
-    # endorsement_ids = "SELECT endorsement_id FROM endorses
-    #                     WHERE follower_id = #{user_id}"
-    # Endorsement.where("id IN (#{endorsement_ids})").page(page).per(per)
-
+  def list_attributes
     endorsement_endorsers
-
-end
+  end
 
   def display_following(user_id, page, per)
     following_ids = "SELECT subject_id FROM follows
@@ -132,6 +129,20 @@ end
   end
 
    # Follows a user.
+
+def self.create_follow_notification(user,follower)
+
+    notification = Notification.new
+    notification.user = User.find_by(id: user)
+    notification.title = User.find_by(id: follower).first_name+" "+User.find_by(id: follower).last_name
+    notification.subtitle = "Wants to follow you"
+    notification.image = User.find_by(id: follower).profile_picture
+    notification.notification_type = 1
+    notification.follower_id = follower
+    notification.save
+
+  end
+
   def follow(person_being_followed, current_user, affinity_level)
     f = Follow.new
     f.follower_id = current_user

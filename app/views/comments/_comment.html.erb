@@ -1,15 +1,28 @@
 <div class="comment-body">
+      <div class="comment-counter">
+      <% if !i.nil? %>
+       <%= i+1%> of <%= c %>
+       <% else %>
+       <i class="fa fa-check-circle fa-2x" aria-hidden="true" style="color:green"></i>
+      <% end %>
+      </div>
       <%= image_tag (d.user.profile_picture.url(:thumb)), class: "profile-picture-comment" %>
       <div class="title-subtitle-comment">
-      <%= d.user.first_name %> <%= d.user.last_name %>
-      </br>
-      <%= d.commentary %>
-      <div class="comment-like-btn">
-      <% if !current_user.nil? && current_user.likes_comment?(d.id) %>
-      <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
-      <%else%>
-      <%= link_to '<i class="fa fa-check" id="like-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
-      <%end%>
-      </div>
+            <%= d.user.first_name %> <%= d.user.last_name %>
+            </br>
+            <%= d.commentary %>
+            <div class="comment-like-btn">
+            <% if !current_user.nil? && current_user.likes_comment?(d.id) %>
+            <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
+            <%else%>
+            <%= link_to '<i class="fa fa-check" id="like-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
+            <%end%>
+            <span class="comment-like-count">
+                  <% if d.likes.count>0 %>
+                  +<%= d.likes.count %>
+                  <%end%>
+            </span>
+            </div>
+
       </div><!--title-subtitle-->
 </div>

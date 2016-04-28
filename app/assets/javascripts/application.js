@@ -20,17 +20,34 @@
 //= require_tree .
 
 //Select2
-$(document).ready(function() {
-
-$.getScript('http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js',function(){
-
-  /* dropdown and filter select */
-  var select = $('#select2').select2();
-
-}); //script
+ function ready_qbe(){
+            $(".endorsement").select2();
+          }
+        $(document).ready(ready_qbe);
+        $(document).on('page:load', ready_qbe);
 
 
-});
+function search_bar() {
+    $('.searchBar').click(function() {
+      var a = document.location.href.split('/');
+      if( a[ a.length - 1 ].indexOf('search') < 0){
+        //Turbolinks.visit("/search");
+        window.location.href = '/search';
+        $('#searchInput').focus(), 500;
+        // document.getElementById('input').focus();
+      }
+
+    });
+}
+$(document).ready(search_bar);
+$(document).on('page:load', search_bar);
+
+
+
+
+
+
+
 
 
 

@@ -1,3 +1,4 @@
-  <% t.comments.each do |d| %>
-    <%= render partial: '/comments/comment', locals: {d: d} %>
+  <% c = t.comments.count %>
+  <% t.comments.each_with_index do |d, index| %>
+    <%= render partial: '/comments/comment', locals: {d: d, c: c, i: index} %>
   <%end%>

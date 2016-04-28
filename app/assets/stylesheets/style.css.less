@@ -57,7 +57,7 @@ body{
 .login_box{
 
   height:20px;
-  background-color:#c6c6c5;
+
   color:white;
   width:60px;
   margin:auto;
@@ -82,7 +82,7 @@ display:inline-block;
 .forabetteryou_box{
 
   height:20px;
-  background-color:#c6c6c5;
+
   color:white;
   width:150px;
   margin:auto;
@@ -150,20 +150,7 @@ display:inline-block;
 
             }//world image
 
-
-            .form-control{
-
-            width:130px;
-            height: 29px;
-            float: left;
-            margin-top: 16px;
-            magin-left:16px !important;
-            font-size: 11px;
-
-            }
-
-
-            form{
+            .searchBar{
 
               width:130px;
             height: 29px;
@@ -173,7 +160,7 @@ display:inline-block;
             font-size: 11px;
             border-radius: 25px !important;
 
-            }//form
+            }//searchBar
 
             #notification_bubble img{
 
@@ -276,7 +263,7 @@ display:inline-block;
         border-radius: 150px;
         margin: 0px;
         padding: 0px;
-        padding-top:7px;
+        margin-top:7px;
         }
 
         .title-subtitle{
@@ -285,6 +272,14 @@ display:inline-block;
           padding-left: 10px;
           position: relative;
           display: inline-block;
+
+        }
+
+         a{
+
+        text-decoration:none;
+        color:grey;
+        display:inline-block !important;
 
         }
 
@@ -343,19 +338,39 @@ display:inline-block;
         padding:0px;
         }
 
+        .profile-picture-home-no-posts img{
+
+        width: 50px;
+        height: 50px;
+        border-radius: 150px !important;
+        margin: 0px 0px 10px 10px;
+        padding: 0px;
+        display:inline-block;
+        float:left;
+        }
+        .post-body-home-no-posts{
+        height:auto;
+        padding:15px 0px 20px 0px;
+        }
         .comments{
         margin-bottom:10px;
 
         }
         .comment-body{
-        width:90%;
+        width:100%;
         float:right;
         background-color:transparent !important;
         display:block;
-        height:60px !important;
+        height:auto !important;
         }
 
-        .row div:nth-child(even){
+        .comment-counter{
+        font-size:10px;
+        display:inline-block;
+        margin-left:40px;
+        }
+
+        .row-striped:nth-of-type(odd){
           background-color: #FFFFFF;
           height: auto;
           font-size: 15px;
@@ -363,7 +378,7 @@ display:inline-block;
 
         }
 
-        .row div:nth-child(2n+1){
+        .row-striped:nth-of-type(even){
           background: rgb(236,245,245);
           height: auto;
           font-size: 15px;
@@ -376,7 +391,8 @@ display:inline-block;
         }
 
         .profile-picture{
-        margin: 0px;
+        margin-top: 15px;
+        margin-bottom: 0px;
         padding: 0px;
         position: relative;
         float: left;
@@ -386,6 +402,13 @@ display:inline-block;
 
         background: transparent !important;
 
+        width: 50px;
+        height: 50px;
+        border-radius: 150px !important;
+        margin: 20px 0 10px 0;
+        padding: 0px;
+        margin-left:10px;
+
         }
 
         .profile-picture img{
@@ -393,7 +416,7 @@ display:inline-block;
         width: 50px;
         height: 50px;
         border-radius: 150px !important;
-        margin: 10px 0 10px 0;
+        margin: 20px 0 10px 0;
         padding: 0px;
         margin-left:10px;
 
@@ -416,16 +439,28 @@ display:inline-block;
         width:210px;
 
         }
+
+        .comment-like-count{
+        display:inline-block;
+        position:relative;
+        margin-left:-13px;
+        margin-bottom:-8px;
+        color:grey;
+
+
+        }
         .new_comment, #comments-section{
         width:220px;
         }
         .title-subtitle{
           background: transparent !important;
-          width:300px;
-          margin-top:10px;
+          width:325px;
+          padding-top:10px !important;
           padding-left: 20px;
           position: relative;
           display: inline-block;
+          font-size:12px;
+
 
         }
         .title-subtitle-comment{
@@ -439,6 +474,7 @@ display:inline-block;
           display: inline-block;
         }
         .comment-like-btn, fa-check{
+        display:block;
         font-size:10px !important;
         margin-top:-5px !important;
 
@@ -447,11 +483,13 @@ display:inline-block;
 
         text-decoration:none;
         color:grey;
+        display:inline-block !important;
 
         }
         .fa{
-        margin-right:30px;
+        margin-right:15px;
         margin-top:10px;
+        display:inline-block !important;
 
         }
         #like-check-red{
@@ -467,11 +505,9 @@ display:inline-block;
         margin-right:0px;
         margin-left:60px;
         }
-        .comment_btn{
-        background-color:transparent;
-        border:none;
-        color:grey;
-        outline: none !important;
+
+        comments-link{
+        width:80px;
         }
 
         .comments-section{
@@ -483,8 +519,7 @@ display:inline-block;
         float:right;
         font-size: 12px;
         color:@green-color-1;
-        margin-top:0px;
-
+        margin:-10px 20px 0px 0px;
         }
 
   }//posts
@@ -508,7 +543,7 @@ display:inline-block;
         .picture-row{
         height:125px;
         background: white;
-        width:400px;
+        width:100%;
         margin:0px;
         padding:0px;
         }
@@ -558,7 +593,7 @@ display:inline-block;
 
         #addVirtue-btn{
           background-color:#c6c6c5;
-          width:147px;
+          width:157px;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -571,7 +606,7 @@ display:inline-block;
         }
         .addVirtue-btn-naranja{
           background-color:orange;
-          width:147px;
+          width:157px;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -606,7 +641,7 @@ display:inline-block;
 
         .follow-btn{
           background-color:#c6c6c5;
-          width:146px;
+          width:157px;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -621,7 +656,7 @@ display:inline-block;
         }
         .follow-btn-naranja{
           background-color:orange;
-          width:146px;
+          width:157px;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -648,7 +683,11 @@ display:inline-block;
           background-color:#ebf5f5;
           height:25px;
           border:0px;
+
+          vertical-align: bottom;
+
         }//form advice
+
 
         .btn-send-advice{
           background-color:#c6c6c5;
@@ -659,19 +698,189 @@ display:inline-block;
           margin-left:-4px;
           font-weight: 700;
            font-style: normal;
-        }//boton send advice
-}//fin profile
 
+        }//boton send advice
+
+        .button-send-advice{
+        height:25px;
+        }
+
+        .add-virtue-section{
+        display:none;
+        }
+
+        .add-virtue-container{
+        height:45px;
+        width:100%;
+        background-color:orange;
+        margin-top: 10px;
+        padding-left:15px;
+        padding-top:0px;
+        padding-bottom:10px;
+        z-index:200;
+        }
+        .fa-search{
+        color:white;
+        margin-top:10px;
+        }
+        .select2-container{
+        width:200px !important;
+        margin-left:15px;
+        position:relative;
+        margin-right:80px;
+        float:left;
+        }
+
+        #virtue-combobox{
+        float:right;
+        width:340px;
+        height:auto;
+        margin: 10px 20px 0px 10px;
+        text-align:left;
+        }
+
+}//fin profile
 /*fin profile css */
 
+/*search*/
+.search-people-container{
+  margin-top:40px;
+  height:auto;
+  width:100%;
 
+#search-people-tab{
+  width:163px;
+  height:40px;
+  background-color:#157579;
+  border: 1px solid grey;
+  border-bottom: 1px solid #157579;
+  z-index:2;
+  margin-top:-40px;
+  margin-left:30px;
+
+  color:grey;
+  text-align:center;
+}
+
+#search-virtue-tab a{
+  color:orange;
+}
+#search-virtue-tab{
+  width:163px;
+  height:40px;
+  background-color:@green-color-1;
+  border: 1px solid grey;
+  z-index:2;
+  margin-top:-40px;
+  margin-left:197px;
+  color:white !important;
+  text-align:center;
+}
+.nav li a:hover, .nav li a:focus{
+  background-color:none;
+}
+
+.search-green-line{
+  width:100%;
+  height:5px;
+  background-color:@green-color-1;
+  margin-top:10px;
+  z-index:1;
+}
+
+.row-striped:nth-of-type(odd){
+          background-color: #FFFFFF;
+          height: auto;
+          font-size: 15px;
+          padding-top: 0px;
+          display:block;
+          margin-left:0px;
+          margin-right:0px;
+
+        }
+.row-striped:nth-of-type(even){
+          background: rgb(236,245,245);
+          height: auto;
+          font-size: 15px;
+          padding-top: 0px;
+          display:block;
+          margin-left:0px;
+          margin-right:0px;
+
+        }
+  .profile-picture-search img{
+        height:40px;
+        background: white;
+        width:40px;
+        margin:auto;
+        margin-right:15px;
+        margin-left:15px;
+        margin-top:5px !important;
+        padding:0px;
+        margin-top:0px;
+        border-radius:150px !important;
+        display:inline-block;
+        float:left;
+        }
+
+        .title-subtitle-search{
+        padding-top:12px;
+        font-size:12px;
+        padding-left:30px;
+        width:200px;
+        float:left;
+
+        }
+
+        .title-subtitle-search-virtue{
+        padding-top:12px;
+        font-size:12px;
+        padding-left:30px;
+        width:300px;
+        float:left;
+        }
+        .follow-search{
+        float:right;
+        font-size: 12px;
+        color:@green-color-1;
+        margin:15px 20px 0px 0px;
+        }
+        .following-search{
+        float:right;
+        font-size: 14px;
+        color:orange;
+        margin:0px 20px 0px 0px;
+        height:100%;
+        padding-top:12px;
+        }
+        .following-search-virtue{
+        float:right;
+        font-size: 14px;
+        color:orange;
+        margin:0px 20px 0px 0px;
+        height:100%;
+        padding-top:12px;
+        }
+
+        a{
+        text-decoration:none;
+        color:grey;
+        }
+
+
+
+}
+
+/*fin search*/
 /*advice display css */
 
+.advice{
 .some-advice{
 
 background-color:#c6c6c5;
-  width:400px;
+
   height:40px;
+  width:100%;
 
 
 }//some advice
@@ -693,7 +902,7 @@ background-color:#c6c6c5;
   padding-top:3px;
 }
 
-.profile-picture{
+.advice .profile-picture{
 
 width: 50px;
 height: 50px;
@@ -715,11 +924,27 @@ display:inline-block;
 
 }
 
-.lineas-intercaladas {
-    width:400px;
-    margin-left:15px;
+.row-striped:nth-of-type(odd){
+          background-color: #FFFFFF;
+          height: auto;
+          font-size: 15px;
+          padding-top: 0px;
+          display:block;
+          margin-left:0px;
+          margin-right:0px;
 
-}
+        }
+.row-striped:nth-of-type(even){
+          background: rgb(236,245,245);
+          height: auto;
+          font-size: 15px;
+          padding-top: 0px;
+          display:block;
+          margin-left:0px;
+          margin-right:0px;
+
+        }
+}//fin advice
 
 /*fin adivce display css */
 
@@ -736,7 +961,7 @@ display:inline-block;
 }//account box
 
 .account_word{
-  background-color:#f0c9cc;
+
   width:60px;
   height:20px;
   text-align:center;
@@ -828,12 +1053,15 @@ position:relative;
   background-color:#f4f4f4;
   color:#878787;
   width:100%;
-  height:510px;
+  height:390px;
 }//affinity container
 
 .affinity_introduction{
+  padding-top:10px;
   border-bottom:1px solid #888888;
-  height:150px;
+  height:60px;
+  text-align:left;
+  padding-left:15px;
 
 }//affinity_introduction
 
@@ -843,13 +1071,14 @@ position:relative;
   border-bottom:1px solid #888888;
   display:inline-block;
   width:100%;
+  border-bottom:1px solid #888888;
 
 }//affinity_button
 
 .affinity_number{
 
-height:100px;
-width:120px;
+height:110px;
+width:135px;
 padding-left:35px;
 font-size:70px;
 background-color:none;
@@ -857,18 +1086,111 @@ float:left;
 display:inline-block;
 padding-top:0px;
 color:#5a9897;
-
+border-bottom:1px solid #888888;
 
 }//affinity_number
 
 .affinity_text{
 
   float:right;
-  width:280px;
-  height:100px;
+  width:283px;
+  height:110px;
   display:inline-block;
   text-align:left;
   color:#777777;
+  padding-top:12px;
+  border-bottom:1px solid #888888;
 
 }//affinity_text
+.each-affinity-box{
+  border-bottom:1px solid #888888;
+  margin:0px;
+  width:100%;
+  height:0px;
+  padding:0px;
+}
 /* Termina affinity container css*/
+
+/* empieza map*/
+.map-container{
+
+  width:100%;
+  margin-top:30px;
+  display:inline-block;
+#searchMap{
+
+background:rgb(236,245,245);
+border:none;
+width:370px;
+height:40px;
+padding-left:10px;
+color:grey;
+display:inline-block;
+float:left;
+}
+#btn-enable-location{
+  display:inline-block;
+  width:35px;
+  color:white;
+  background-color:#c6c6c5;
+  height:35px;
+  margin-left:5px;
+  margin-top:2px;
+  padding-top:5px;
+  text-align:center;
+  border-radius:150px;
+}
+#btn-disable-location{
+  display:inline-block;
+  width:35px;
+  color:white;
+  background-color:orange;
+  height:35px;
+  margin-left:5px;
+  margin-top:2px;
+  padding-top:5px;
+  text-align:center;
+  border-radius:150px;
+}
+
+.row-striped:nth-of-type(odd){
+          background-color: #FFFFFF;
+          height: auto;
+          font-size: 15px;
+          padding-top: 0px;
+          margin:0px;
+
+        }
+
+        .row-striped:nth-of-type(even){
+          background: rgb(236,245,245);
+          height: auto;
+          font-size: 15px;
+          padding-top: 0px;
+          margin:0px;
+
+        }
+
+.map-content{
+  margin-top:20px;
+}
+.person-name-map{
+float:left;
+padding-left:20px;
+
+}
+a{
+  color:grey;
+  text-decoration:none;
+}
+.person-city-map{
+float:right;
+padding-right:30px;
+}
+
+
+
+
+
+}//map container
+/*Termina map*/

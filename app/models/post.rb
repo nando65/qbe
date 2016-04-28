@@ -16,6 +16,7 @@ def self.share_post(post_id, current_user)
     new_post.user_id = u.id
     new_post.shared_post=1
     new_post.person_sharing = u.first_name+" "+u.last_name
+    new_post.person_sharing_id = u.id
     new_post.save
 
 end

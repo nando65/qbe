@@ -1,0 +1,18 @@
+<% current_user.following_endorsements.group(:name).count.each do |u|%>
+            <div class="row row-striped">
+                           <div class="title-subtitle-search-virtue">
+                            <%= link_to "#{u[0]}", :controller => "profile", :action => "index", :subject => "3" %>
+                            </div><!--title-subtitle-->
+                            <div class="following-search-virtue"><%= "#{u[1]} "%><i class="fa fa-user" aria-hidden="true" style="color:orange"></i></div>
+            </div><!--row-->
+<%end%>
+  <% Endorse.group(:endorsement_id).count.each do |e| %>
+            <div class="row row-striped">
+                  <div class="title-subtitle-search-virtue">
+                    <%= link_to Endorsement.find_by(id: e[0]).name,"#"%>
+
+                  </div>
+                  <div class="following-search-virtue" style="color:grey"><%= "#{e[1]} "%><i class="fa fa-user" aria-hidden="true" style="color:grey"></i></div>
+                </div><!--row-->
+
+        <% end %>

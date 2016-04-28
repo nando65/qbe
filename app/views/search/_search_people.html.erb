@@ -1,0 +1,27 @@
+  <% current_user.following.each do |u|%>
+    <%if u.id != current_user.id %>
+    <div class="row row-striped">
+                      <div class="profile-picture-search">
+                        <%= image_tag u.profile_picture.url(:thumb) %>
+                      </div><!--profile picture-->
+
+                        <div class="title-subtitle-search">
+                    <%= link_to "#{u.first_name} #{u.last_name}", :controller => "profile", :action => "index", :subject => u.id %>
+                      </div><!--title-subtitle-->
+                      <div class="following-search">Following <i class="fa fa-check-circle" aria-hidden="true"></i></div>
+    </div><!--row-->
+    <%end%>
+  <%end%>
+  <% @last_users.each do |t| %>
+          <% if Notification.find_by(follower_id: current_user.id, user_id: t.id).nil? && !current_user.following?(t.id)%>
+            <div class="row row-striped">
+            <div class="profile-picture-search">
+                    <%= image_tag (t.profile_picture.url(:thumb)) %>
+                  </div><!--profile picture-->
+                  <div class="title-subtitle-search">
+                    <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
+                  </div>
+                  <%= link_to "+Follow", {:controller => "profile", :action => "create_follow_request", :subject => t.id, :follower => current_user.id}, :class=>"follow-search" %>
+                </div><!--row-->
+          <% end %>
+        <% end %>

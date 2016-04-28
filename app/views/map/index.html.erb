@@ -1,0 +1,28 @@
+
+<div class="map-container">
+<input id="searchMap" type="text" placeholder="&#xF002;" style="font-family:Arial, FontAwesome" />
+<% if current_user.active_location%>
+<%= link_to '<i class="fa fa-at fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "btn-disable-location"%>
+<% else %>
+<%= link_to '<i class="fa fa-at fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "btn-enable-location"%>
+<% end%>
+<div class="map-content">
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{current_user.latitude}%2C#{current_user.longitude}" %>
+
+<h3>Nearby locations</h3>
+<ul>
+<% for location in @location.nearbys(10) %>
+  <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
+<% end %>
+</ul>
+
+<% current_user.following.each do |u|%>
+            <div class="row row-striped">
+                           <div class="person-name-map">
+                            <%= link_to "#{u.first_name} #{u.last_name}", :controller => "profile", :action => "index", :subject => "3" %>
+                            </div><!--person name map-->
+                            <div class="person-city-map"><%= "#{u.city} "%></div>
+            </div><!--row-->
+<%end%>
+</div><!--map content-->
+</div><!-- map container-->

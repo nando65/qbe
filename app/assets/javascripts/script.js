@@ -1,4 +1,4 @@
-$(document).ready(function(){
+function ready(){
 
   $('.new_comment').on("ajax:success", function(e, data, status){
     if(data.result == 'success'){
@@ -21,4 +21,7 @@ $(document).ready(function(){
     console.log(error);
   });
 
-});
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready)

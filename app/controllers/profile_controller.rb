@@ -21,9 +21,8 @@ class ProfileController < ApplicationController
     end
   end
 
-  def create_follow
-
-    Follow.follow(2, params[:follower])
+  def create_follow_request
+    User.create_follow_notification(params[:subject], params[:follower])
     redirect_to :controller => 'home', :action => 'index'
   end
 

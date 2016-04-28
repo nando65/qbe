@@ -7,11 +7,13 @@
               <div class="profile-picture">
                 <%= image_tag (t.image.url(:thumb)) %>
               </div><!--profile picture-->
+
               <div class="title-subtitle">
-                <%= t.title %>
+                <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
               </br>
                 <%= t.subtitle %>
-              </div><!--title-subtitle-->
+              </br>
+                </div><!--title-subtitle-->
               <% if t.notification_type == 1 %>
               <div class="notification_right">
                 <%= link_to '<i class="fa fa-times-circle fa-3x" aria-hidden="true"></i>'.html_safe,  {:action =>"destroy_follow", :subject_id => t.user_id, :follower_id => t.follower_id, :notification_id => t.id} %>
