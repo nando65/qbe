@@ -3,7 +3,7 @@
 <div id="notifications">
     <div class="row">
       <% @notifications.each do |t| %>
-      <div class="col-md-12">
+<div class="width-center-column" style="width:400px">
               <div class="profile-picture">
                 <%= image_tag (t.image.url(:thumb)) %>
               </div><!--profile picture-->
@@ -11,7 +11,24 @@
               <div class="title-subtitle">
                 <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
               </br>
-                <%= t.subtitle %>
+                <% case t.notification_type %>
+                  <% when 1 %>
+                  <%= render partial: 'notification_type1', locals: {t: t} %>
+                  <% when 2 %>
+                  <%= render partial: 'notification_type2', locals: {t: t} %>
+                  <% when 3 %>
+                  <%= render partial: 'notification_type3', locals: {t: t} %>
+                  <% when 4 %>
+                  <%= render partial: 'notification_type4', locals: {t: t} %>
+                  <% when 5 %>
+                  <%= render partial: 'notification_type5', locals: {t: t} %>
+                  <% when 6 %>
+                  <%= render partial: 'notification_type6', locals: {t: t} %>
+                  <% when 7 %>
+                  <%= render partial: 'notification_type7', locals: {t: t} %>
+                <% else %>
+                 <%= t.subtitle %>
+                <% end %>
               </br>
                 </div><!--title-subtitle-->
               <% if t.notification_type == 1 %>
@@ -24,7 +41,7 @@
                 <div class="endorsement_weight">+<%= t.endorse_weight%></div>
               </div><!-- notification right -->
               <% end %>
-       </div><!--col-md-->
+             </div><!--width-center-column -->
       <% end %><!--notifications each-->
       <%= paginate @notifications, theme: 'twitter-bootstrap-3' %>
     </div><!--row-->

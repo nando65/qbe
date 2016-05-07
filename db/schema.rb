@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420023847) do
+ActiveRecord::Schema.define(version: 20160506215628) do
 
   create_table "advises", force: :cascade do |t|
     t.integer  "gives_advice_to",      limit: 4,     null: false
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 20160420023847) do
     t.integer  "comment_id", limit: 4
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "address",    limit: 255
+    t.float    "latitude",   limit: 24
+    t.float    "longitude",  limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",            limit: 4
     t.datetime "created_at",                       null: false
@@ -109,8 +117,9 @@ ActiveRecord::Schema.define(version: 20160420023847) do
 
   create_table "problems", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "problem",    limit: 65535
   end
 
   create_table "terms", force: :cascade do |t|
@@ -142,7 +151,7 @@ ActiveRecord::Schema.define(version: 20160420023847) do
     t.string   "job_title",                    limit: 255
     t.string   "company_name",                 limit: 255
     t.boolean  "active_location"
-    t.boolean  "private_advise"
+    t.boolean  "private_advise",                             default: true
     t.string   "facebook_id",                  limit: 255
     t.text     "biography",                    limit: 65535
     t.string   "phone",                        limit: 255
@@ -154,6 +163,8 @@ ActiveRecord::Schema.define(version: 20160420023847) do
     t.datetime "confirmation_sent_at"
     t.string   "provider",                     limit: 255
     t.string   "uid",                          limit: 255
+    t.float    "latitude",                     limit: 24
+    t.float    "longitude",                    limit: 24
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

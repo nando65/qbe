@@ -1,6 +1,7 @@
 class Endorsement < ActiveRecord::Base
 
   has_many :endorses
+  scope :endorsement_name_starts_with, -> (query) { where("name LIKE ? ","%#{query}%")}
 
 def inser_attributes
     a=[
@@ -417,6 +418,7 @@ def inser_attributes
         a.each do |b|
           c = Endorsement.new
           c.name=b
+          c.save
         end
   end
 end

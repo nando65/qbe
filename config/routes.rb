@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
+
 #devise_for :users
 devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 resources :comments
+resources :problems
 resources :endorses
 resources :advises
 resources :notifications
 
 match 'profile/update/:id', to: 'profile#update', :via => [:post]
-
+match 'comments/get_next_three', to: 'comments#get_next_three', via: [:post]
 
 match 'login/', to: 'login#login_page', :via => [:post, :get]
-match ':controller(/:action(:/id))', :via => :get
+match ':controller(/:action(:/id))', :via => [:post, :get]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

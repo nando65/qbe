@@ -12,39 +12,18 @@
 //
 //= require select2
 //= require jquery
+//= require jquery.turbolinks
 //= require bootstrap-switch
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require advice2
+//= require attribute2
 //= require script
+//= require underscore
+//= require gmaps/google
+//= require search2
 //= require_tree .
-
-//Select2
- function ready_qbe(){
-            $(".endorsement").select2();
-          }
-        $(document).ready(ready_qbe);
-        $(document).on('page:load', ready_qbe);
-
-
-function search_bar() {
-    $('.searchBar').click(function() {
-      var a = document.location.href.split('/');
-      if( a[ a.length - 1 ].indexOf('search') < 0){
-        //Turbolinks.visit("/search");
-        window.location.href = '/search';
-        $('#searchInput').focus(), 500;
-        // document.getElementById('input').focus();
-      }
-
-    });
-}
-$(document).ready(search_bar);
-$(document).on('page:load', search_bar);
-
-
-
-
 
 
 

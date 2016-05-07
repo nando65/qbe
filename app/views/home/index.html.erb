@@ -2,7 +2,6 @@
 <html>
 <div id="posts">
       <% if @posts.nil? %>
-
         <% @last_users.each do |t| %>
           <% if Notification.find_by(follower_id: current_user.id, user_id: t.id).nil? && !current_user.following?(t.id)%>
             <div class="row row-striped">
@@ -18,7 +17,6 @@
                 </div><!--row-->
           <% end %>
         <% end %>
-
       <% else %>
       <% @posts.each do |t| %>
       <div class="row row-striped">
@@ -32,8 +30,15 @@
                 <%= image_tag (t.user.profile_picture.url(:thumb)), class:"profile-picture" %>
               <div class="title-subtitle">
                 <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
-              </br>
-                <%= t.subtitle %>
+                </br>
+                <% case t.post_type %>
+                <% when 1 %>
+                  <%= render partial: 'post_type1', locals: {t: t} %>
+                <% when 2 %>
+                  <%= render partial: 'post_type2', locals: {t: t} %>
+                <% else %>
+                 <%= t.subtitle %>
+                <% end %>
               </br>
                     <% if !current_user.nil? && current_user.likes?(t.id) %>
                     <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like", :post_id => t.id, :current_user_id => current_user.id} %>

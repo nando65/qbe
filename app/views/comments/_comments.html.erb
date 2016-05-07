@@ -1,4 +1,10 @@
   <% c = t.comments.count %>
-  <% t.comments.each_with_index do |d, index| %>
+  <% n = 3 %>
+  <% t.comments.limit(n).each_with_index do |d, index| %>
     <%= render partial: '/comments/comment', locals: {d: d, c: c, i: index} %>
   <%end%>
+  <input type="hidden" class="last-comment" value="3">
+  <input type="hidden" class="post-info" value="<%= t.id %>">
+<% if t.comments.length > 3 %>
+  <%= link_to 'Show more', '#', class:'show-more-comments-link' %>
+<% end %>

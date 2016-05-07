@@ -6,8 +6,9 @@ class AdvisesController < ApplicationController
   def create
     @advise = Advise.new(advise_params)
     if @advise.save
-      redirect_to :controller => 'profile', :action => 'index'
+      render json:{ result: :success, data: render_to_string( partial: '/advise/advise', locals: {t: @advise} ) }
     end
+      # redirect_to :controller => 'profile', :action => 'index'
 
   end
 

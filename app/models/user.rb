@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-
-
+  # scope :first_name_starts_with, -> (first_name) { where("first_name like ?", "%#{first_name}%")}
+  scope :first_or_last_name_starts_with, -> (query) { where("first_name LIKE ? OR last_name LIKE ?","%#{query}%","%#{query}%")}
+  # scope :city_starts_with, -> (city) { where("city like ?", "%#{city}%")}
+  # scope :last_name_starts_with, -> (first_name, last_name, city) { where("first_name LIKE ? OR last_name LIKE ? OR city LIKE ?","%#{first_name}%","%#{last_name}%","%#{city}%")}
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:facebook]
@@ -48,7 +50,7 @@ class User < ActiveRecord::Base
 
   has_many :notifications
 
-  has_attached_file :profile_picture, styles: { medium: "300x300#", thumb: "100x100#" }
+  has_attached_file :profile_picture, styles: { medium: "300x300#", thumb: "100x100#", small: "36x36#" }
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
    after_create :autofollow
 
@@ -61,6 +63,7 @@ class User < ActiveRecord::Base
     # f.affinity_id = 1
     # f.save
   end
+
 
   def self.from_omniauth(auth)
 
@@ -89,6 +92,9 @@ class User < ActiveRecord::Base
 
   end
 
+  def self.return_user_by_attribute(attribute)
+    User.joins(:endorsement_endorsers).where('endorsements.name = ?', attribute).distinct()
+  end
   def return_affinity_level(subject_id)
     u = self.follows_following.where(subject_id: subject_id)
     if u.length < 1
@@ -119,6 +125,19 @@ class User < ActiveRecord::Base
 
   def list_attributes
     endorsement_endorsers
+  end
+
+  def attributes_and_weight
+    z=self.endorses_endorser
+    b=Hash.new(0)
+        z.each do |v|
+          b[v.endorsement_id]+=v.weight
+        end
+    m=Hash.new(0)
+    b.each do|key, value|
+       m[Endorsement.where(id: key).map{|n| n.name}]=value
+    end
+    return m
   end
 
   def display_following(user_id, page, per)

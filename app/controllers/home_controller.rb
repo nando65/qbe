@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    if current_user.feed(1,10).count == 0
+    if current_user.feed(0,10).count == 0
     @last_users = User.first(20).reverse
     else
     @posts = current_user.feed(params[:page],10).order('created_at DESC')

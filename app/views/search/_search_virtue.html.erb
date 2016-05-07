@@ -1,18 +1,25 @@
 <% current_user.following_endorsements.group(:name).count.each do |u|%>
+    <% @filtered_endorsements.each do |f| %>
+           <% if u[0] == f.name %>
             <div class="row row-striped">
                            <div class="title-subtitle-search-virtue">
-                            <%= link_to "#{u[0]}", :controller => "profile", :action => "index", :subject => "3" %>
+                            <%= link_to "#{u[0]}", :action => "people_filtered", :endorsement_name => u[0]%>
                             </div><!--title-subtitle-->
                             <div class="following-search-virtue"><%= "#{u[1]} "%><i class="fa fa-user" aria-hidden="true" style="color:orange"></i></div>
             </div><!--row-->
+            <% end %>
+    <% end %>
 <%end%>
   <% Endorse.group(:endorsement_id).count.each do |e| %>
+    <% t=Endorsement.find_by(id: e[0]).name %>
+    <% @filtered_endorsements.each do |f| %>
+           <% if t == f.name %>
             <div class="row row-striped">
                   <div class="title-subtitle-search-virtue">
-                    <%= link_to Endorsement.find_by(id: e[0]).name,"#"%>
-
+                    <%= link_to t,"#"%>
                   </div>
                   <div class="following-search-virtue" style="color:grey"><%= "#{e[1]} "%><i class="fa fa-user" aria-hidden="true" style="color:grey"></i></div>
                 </div><!--row-->
-
-        <% end %>
+            <% end %>
+    <% end %>
+<% end %>

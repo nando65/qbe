@@ -1,0 +1,1 @@
+endorsed  <%= link_to " "+User.find_by(id: t.follower_id).first_name+" "+User.find_by(id: t.follower_id).last_name,{:controller => "profile", :action => "index", :subject => t.user_id},{style: "color:blue !important"} %> for<span style="color:orange"><%= " "+t.subtitle.split.last %></span>

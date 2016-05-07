@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <head>
     <title>Qbe</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <link rel="icon" type="image/png" href="<%= image_path('qbe_favicon.png') %>">
     <%= csrf_meta_tags %>
-    <script src="../../javascripts/select2.js"></script>
-    <script>
-        function ready_qbe(){
-            $(".endorsement").select2();
-          }
-        $(document).ready(ready_qbe);
-        $(document).on('page:load', ready_qbe);
-    </script>
 
   </head>
   <body class="<%= controller_name %>-<%= action_name %>">
     <div id="main-wrapper">
       <div id="header-wrapper">
+        <div class="col-md-4 col-md-offset-4">
         <div id="header">
-          <%= link_to(image_tag('logo_qbe.svg'), {controller: '/home', action: :index}, id: 'logo') %>
-            <%= link_to(image_tag('world.svg'), {controller: :map, action: :index}, id: 'world_image') %>
+          <%= link_to(image_tag('logo_qbe.png'), {controller: '/home', action: :index}, id: 'logo') %>
+            <%= link_to(image_tag('world.svg'), {controller: :map, action: :index}, id: 'world_image', 'data-no-turbolink' => true)%>
             <div class="searchBar" id="divContent">
+            <div id="search-bar-results">
+            </div>
             <input id="searchInput" type="text" name="txt1"></input>
             </div>
             <%= link_to(image_tag('notification_bubble.svg'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
             <% if current_user %>
-            <%= link_to(current_user.first_name+" "+current_user.last_name[0],{controller: :profile, action: :edit_user} , id:'user_name')  %>
+            <%= link_to(current_user.first_name+" "+current_user.last_name[0],{:controller => "profile", :action => "index", :subject => current_user.id}, id:'user_name')  %>
             <% end %>
       </div> <!-- header -->
 </div> <!-- header wrapper-->
+</div><!--col md 4-->
         <span class="clearer"></span>
        </div><!--main wrapper -->
       <div id="content-wrapper">

@@ -1,0 +1,16 @@
+ <div class="people-filter-container">
+  <% @users.each do |t| %>
+        <div class="row row-striped">
+            <div class="post-body-attribute">
+                  <div class="profile-picture-attribute">
+                    <%= image_tag (t.profile_picture.url(:thumb)) %>
+                  </div><!--profile picture-->
+                  <div class="title-subtitle">
+                    <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
+                  </div>
+                  <div class="attribute-name"><%= @attribute%></div>
+                </div><!--post body-->
+                </div><!--row-->
+
+<% end %>
+</div><!--people filter container-->

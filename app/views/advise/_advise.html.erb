@@ -1,0 +1,10 @@
+  <div class="row row-striped" id="advice-body">
+
+          <div class="profile-picture-advice">
+            <%= image_tag t.advisor.profile_picture.url(:thumb) %>
+          </div><!--profile picture-->
+          <div class="title-subtitle-advice">
+            <%= t.advisor.first_name+" "+t.advisor.last_name %></br>
+            <%= t.advise %>
+          </div><!--title-subtitle-->
+      </div><!--row-->

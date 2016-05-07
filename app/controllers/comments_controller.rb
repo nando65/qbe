@@ -15,6 +15,18 @@ class CommentsController < ApplicationController
   def update
   end
 
+  def get_next_three
+    @post = Post.find params[:post_id]
+    @comments = @post.comments.offset(params[:last_comment]).limit(3)
+    s = ''
+    i = params[:last_comment].to_i
+    @comments.each do |c|
+      s += render_to_string( partial: '/comments/comment', locals: {d: c, i: i, c: @post.comments.length} )
+      i = i + 1
+    end
+    render json: {  html: s, new_last_comment: i  }
+  end
+
   private
 
   def comment_params

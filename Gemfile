@@ -86,3 +86,8 @@ gem 'bootstrap-kaminari-views'
 
 
 gem "select2-rails"
+
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'jquery-turbolinks'

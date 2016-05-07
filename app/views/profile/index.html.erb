@@ -3,27 +3,43 @@
 <head>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <link href="../../assets/stylesheets/select2.css" rel="stylesheet"/>
 </head>
 <div class="profile">
-
       <div class="attributes-display">
-      <% @user.list_attributes.each do |a| %>
-        <%= a.name %>
-      <% end %>
+        <div class="cloudtag">
+          <% if @user.attributes_and_weight %>
+              <% @user.attributes_and_weight.each do |key, value| %>
+                  <%
+                    w = 8 * value.to_i
+                    w = 50 if w > 50
+                  %>
+                  <div class="tag" style="font-size:<%= w %>px; text-align:center!important;">
+                    <%= key[0] %>
+                  </div>
+              <% end %>
+           <% end %>
+          <span class="clearer"></span>
+      </div>
     </div>
     <div class="picture-row">
     <% if !current_user.nil? && current_user.following?(@user.id) && !(current_user.id==@user.id)%>
-          <%= link_to 'Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "add-virtue-link", class: "addVirtue-btn-naranja", data: { link:  "#add-virtue-section"} %>
+          <%= link_to 'Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "add-virtue-link", class: "addVirtue-btn-naranja", data: { link:  "#add-virtue-section"} %>
 
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
          <%= link_to "-Unfollow", {:action => "destroy_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
     <% elsif  !current_user.nil? && current_user.id==@user.id %>
-          <%= image_tag (@user.profile_picture.url(:thumb)), class: "profile_picture_own_account" %>
-    <% else %>
-          <a href="#" id="addVirtue-btn">Add Virtue<i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+          <div id="addVirtue-btn"></div>
+          <%= image_tag (@user.profile_picture.url(:thumb)) %>
+          <%= link_to "Settings", {:controller => "profile", :action =>"edit_user"},  { :class=>"follow-btn" } %>
+
+    <% elsif Notification.find_by(follower_id: current_user.id, user_id: @user.id).nil? && !current_user.following?(@user.id) %>
+          <a href="#" id="addVirtue-btn">Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
          <%= link_to "Follow", {:action => "create_follow_request", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
+    <% else %>
+      <a href="#" id="addVirtue-btn">Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+             <%= image_tag (@user.profile_picture.url(:thumb)) %>
+         <%= link_to "Requested...", {:controller => "notifications", :action => "destroy_follow_request", :notification_id => Notification.find_by(follower_id: current_user.id, user_id: @user.id).id},  { :class=>"follow-btn" } %>
     <% end %>
     </div>
     <section class="add-virtue-section" id="add-virtue-section">
@@ -35,38 +51,29 @@
       @<%= @user.company_name %>
     </div>
        <% if !current_user.nil? && current_user.following?(@user.id) && current_user.id != @user.id %>
-          <%= form_for(@advise, remote: true) do |c| %>
-          <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
-          <%= c.hidden_field :receives_advice_from, :value => @user.id %>
-          <%= c.text_area :advise, class: 'form_advice', placeholder: "Give me some advice" %>
-          <span class="button-send-advice">
-          <%= submit_tag "Send", class:"btn-send-advice" %>
-        </span>
-          <% end %>
+          <%= render partial: '/advise/advise_form', locals: {advise: @advise} %>
         <% end %>
-        <% if @user.private_advise==0 || @user.id == current_user.id %>
+
+        <% if !@user.private_advise || @user.id == current_user.id %>
         <div class="advice">
             <div class="some-advice">
                 <div class="some-advice-for-you">
                   Some advice for you
                 </div><!-- some advice for you -->
                 <% if !current_user.nil? && current_user.id==@user.id %>
-                <div class="private-advice">
-                  <input type="checkbox" checked data-toggle="toggle" data-on="public" data-off="private" data-onstyle="success" data-offstyle="danger" data-width="100" data-height="5">
-                </div><!-- private advice -->
-                <% end %>
+                  <div class="private-advice">
+                      <%if !current_user.private_advise %>
+                      <%= button_to 'Set to Private', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:red !important"}%>
+                      <%else%>
+                      <%= button_to 'Set to Public', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:green !important; color:white;"} %>
+                      <%end%><!--if else if-->
+                  </div><!-- private advice -->
+                <% end %><!-- if current_user.nil? && current_user.id==@user.id -->
             </div><!-- some advice -->
-              <% @advices.each do |t| %>
-              <div class="row row-striped">
-                      <div class="profile-picture-advice">
-                        <%= image_tag t.advisor.profile_picture.url(:thumb) %>
-                      </div><!--profile picture-->
-                      <div class="title-subtitle-advice">
-                        <%= t.advisor.first_name+" "+t.advisor.last_name %></br>
-                        <%= t.advise %>
-                      </div><!--title-subtitle-->
-                  </div><!--row-->
-              <% end %><!--notifications each-->
+
+              <span class="advices-display">
+                    <%= render partial: '/advise/advises', locals: {advices: @advices} %>
+              </span>
         </div><!-- advice -->
         <%end%>
 </div>

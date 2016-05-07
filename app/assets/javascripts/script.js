@@ -21,7 +21,35 @@ function ready(){
     console.log(error);
   });
 
+  $('.show-more-comments-link').click(function(){
+    var lc = $(this).siblings('.last-comment').val();
+    var pi = $(this).siblings('.post-info').val();
+    var sml = $(this);
+    $.ajax('/comments/get_next_three',{
+      data: {
+        post_id: pi,
+        last_comment: lc,
+      },
+      success: function(data){
+        if( !data.html ){
+          //alert('There are no more comments to load.');
+          sml.fadeOut(function(){
+            sml.prop('style','display:none !important');
+          });
+        }
+        sml.parents('.comments').find('.comment-body:last').after(data.html);
+        sml.siblings('.last-comment').val( data.new_last_comment );
+      }, error: function(){
+        alert('Sorry, could not load new comments. Please try again.');
+      },
+      method: 'post'
+    });
+    return false;
+  });
+
 }
 
 $(document).ready(ready);
-$(document).on('page:load', ready)
+$(document).on('page:load', ready);
+
+

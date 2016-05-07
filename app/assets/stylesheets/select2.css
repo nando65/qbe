@@ -178,7 +178,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
 }
 
 .select2-container .select2-choice .select2-arrow {
-    display: inline-block;
+    display: none !important;
     width: 18px;
     height: 100%;
     position: absolute;
@@ -199,6 +199,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
 }
 
 html[dir="rtl"] .select2-container .select2-choice .select2-arrow {
+    display: none !important;
     left: 0;
     right: auto;
 
@@ -208,7 +209,7 @@ html[dir="rtl"] .select2-container .select2-choice .select2-arrow {
 }
 
 .select2-container .select2-choice .select2-arrow b {
-    display: block;
+    display: none !important;
     width: 100%;
     height: 100%;
     background: url('select2.png') no-repeat 0 1px;
@@ -216,6 +217,8 @@ html[dir="rtl"] .select2-container .select2-choice .select2-arrow {
 
 html[dir="rtl"] .select2-container .select2-choice .select2-arrow b {
     background-position: 2px 1px;
+    display: none !important;
+
 }
 
 .select2-search {
@@ -681,6 +684,7 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
     .select2-search-choice-close,
     .select2-container .select2-choice abbr,
     .select2-container .select2-choice .select2-arrow b {
+
         background-image: url('select2x2.png') !important;
         background-repeat: no-repeat !important;
         background-size: 60px 40px !important;

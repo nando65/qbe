@@ -6,8 +6,8 @@ class EndorsesController < ApplicationController
   def create
     @endorse = Endorse.new(endorse_params)
     if @endorse.save
-      redirect_to :controller => 'home', :action => 'index'
-    #render json:{ result: :success, data: render_to_string( partial: '/endorse/endorse', locals: {d: @comment} ) }
+      #redirect_to :controller => 'home', :action => 'index'
+    render json:{ result: :success, data: render_to_string( partial: '/endorse/endorse', locals: {d: @comment} ) }
     else
     render json:{ result: :error, data: @comment.errors.full_messages.first }
     end

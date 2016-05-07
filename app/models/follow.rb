@@ -5,6 +5,7 @@ class Follow < ActiveRecord::Base
   belongs_to :affinity
   scope :wait_acceptance, -> {where ( 'affinity_id is not null')}
   after_create :create_notification
+  after_create :create_post
 
   def self.follow(subject, follower, affinity)
     Follow.where(:subject_id => subject, :follower_id => follower, :affinity_id => affinity).first_or_create(:subject_id => subject, :follower_id => follower, :affinity_id => affinity)
@@ -13,14 +14,17 @@ class Follow < ActiveRecord::Base
     follow_id.destroy
   end
   def create_post
-    post = Post.new
-    post.user = self.subject
-    post.title = self.follower.first_name+" "+self.follower.last_name
-    post.subtitle = "Is now following "+self.subject
-    post.image = self.follower.profile_picture
-    post.follower_id = self.follower.id
-    post.share=0
-    post.save
+    if self.follower!=self.subject
+      post = Post.new
+      post.user = self.follower
+      post.title = self.follower.first_name+" "+self.follower.last_name
+      post.subtitle = "Is now following "+self.subject.first_name+" "+self.subject.first_name
+      post.image = self.follower.profile_picture
+      post.follower_id = self.subject.id
+      post.post_type=2
+      post.shared_post=0
+      post.save
+    end
   end
   def create_notification
     if self.follower != self.subject

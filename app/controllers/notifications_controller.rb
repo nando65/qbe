@@ -16,12 +16,19 @@ class NotificationsController < ApplicationController
     @affinity = Affinity.all
   end
   def create_follow
-    Follow.follow(params[:subject_id], params[:follower_id], params[:affinity_id] )
-    Notification.destroy_all(id: params[:notification_id])
-    redirect_to :controller => 'home', :action => 'index'
+    if !Affinity.find_by_id(params[:affinity_id]).nil? && current_user.id == params.subject_id.to_i && Notification.find_by(follower_id: current_user.id, user_id: t.id).nil?
+      Follow.follow(params[:subject_id], params[:follower_id], params[:affinity_id] )
+    end
+      Notification.destroy_all(id: params[:notification_id])
+      redirect_to :controller => 'home', :action => 'index'
+
   end
   def destroy_follow
     Follow.destroy_all(subject_id: params[:subject_id], follower_id: params[:follower_id])
+    Notification.destroy_all(id: params[:notification_id])
+    redirect_to controller: :home, action: :index
+  end
+  def destroy_follow_request
     Notification.destroy_all(id: params[:notification_id])
     redirect_to controller: :home, action: :index
   end

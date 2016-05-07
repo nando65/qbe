@@ -5,6 +5,7 @@ class Endorse < ActiveRecord::Base
   before_save :set_weight
   validate :no_more_than_five
   after_create :create_notification
+  after_create :create_post
 
 def no_more_than_five
    if Endorse.where(:endorser => self.endorser, :endorsee => self.endorsee).count > 4
@@ -32,11 +33,12 @@ def self.endorse(endorser, endorsee, endorsement)
 end
 def create_post
     post = Post.new
-    post.user = self.endorsee
-    post.title = self.endorsee.first_name+" "+self.endorser.last_name
-    post.subtitle = "Has endorsed "+self.subject+" for "+self.endorsement
+    post.user = self.endorser
+    post.title = self.endorser.first_name+" "+self.endorser.last_name
+    post.subtitle = "Has endorsed "+self.endorsee.first_name+" "+self.endorsee.last_name+" for "+ self.endorsement.name
     post.image = self.endorser.profile_picture
-    post.follower_id = self.endorser.id
+    post.follower_id = self.endorsee.id
+    post.post_type=1
     post.save
 end
 def create_notification

@@ -1,0 +1,7 @@
+<%= form_for(problem, id: "problems-section", remote: true, ) do |c| %>
+                      <fieldset id="problem-fieldset">
+                            <%= c.hidden_field :user_id, :value => current_user.id %>
+                            <%= c.text_area :problem, class: "post_control problem_problem", id: "text-poblem", placeholder: "Write your problem..." %>
+                              <%= c.submit 'Send', class: 'button', id: 'problem-send-btn' %>
+                      </fieldset>
+<%end%>

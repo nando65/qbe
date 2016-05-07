@@ -1,21 +1,43 @@
 class ProfileController < ApplicationController
 
   def index
+    if params[:subject]
     @user = User.find_by(id: params[:subject])
+    @advices = User.find_by(id: params[:subject]).advises.order('created_at DESC')
+    @endorse_filter=Endorse.where(follower_id=current_user.id && subject_id=params[:subject])
+    array=[]
+    @endorse_filter.each do |e|
+      array<< e.endorsement_id
+    end
+    @endorsements = Endorsement.where.not(id: array)
+    else
+    @user = current_user
     @advices = current_user.advises_display(0,10)
+    @endorsements = Endorsement.all
+    end
     @advise = Advise.new
     @endorse = Endorse.new
-    @endorsements = Endorsement.all
+
   end
 
   def edit_user
     @user = User.find_by(id: current_user.id)
+    @problem = Problem.new
   end
 
   def update
     @user = User.find_by(id: current_user.id)
     if @user.update user_params
       redirect_to action: :edit_user
+    else
+      render :edit_user
+    end
+  end
+
+  def update_private_advise
+    @user = User.find_by(id: current_user.id)
+    if @user.update user_params_advise
+      redirect_to action: :index
     else
       render :edit_user
     end
@@ -35,7 +57,11 @@ class ProfileController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :company_name, :job_title)
+    params.require(:user).permit(:first_name, :last_name, :company_name, :job_title, :private_advise)
+  end
+
+  def user_params_advise
+    params.permit(:private_advise)
   end
 
   def advise_params
