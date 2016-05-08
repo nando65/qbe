@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <div id="posts">
       <% if @posts.nil? %>
         <% @last_users.each do |t| %>
@@ -61,4 +59,3 @@
        <%= paginate @posts, theme: 'twitter-bootstrap-3' %>
       <% end %>
   </div><!--posts-->
-</html>

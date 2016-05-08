@@ -1,5 +1,5 @@
   <!-- Following -->
-  <% @users.each do |u| %>
+  <% @users_following.each do |u| %>
           <%if u.id != current_user.id && current_user.following?(u.id) %>
           <div class="row row-striped">
                             <div class="profile-picture-search">
@@ -14,7 +14,7 @@
           <%end%>
           <%end%>
 <!-- Follow suggestions -->
-<% @users.each do |t| %>
+<% @users_not_following.each do |t| %>
           <% if Notification.find_by(follower_id: current_user.id, user_id: t.id).nil? && !current_user.following?(t.id)%>
             <div class="row row-striped">
             <div class="profile-picture-search">
@@ -28,7 +28,7 @@
           <% end %>
         <% end %>
 <!-- Follow requested -->
-<% @users.each do |t| %>
+<% @users_not_following.each do |t| %>
           <% if Notification.find_by(follower_id: current_user.id, user_id: t.id) && !current_user.following?(t.id)%>
             <div class="row row-striped">
             <div class="profile-picture-search">

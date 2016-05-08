@@ -5,6 +5,21 @@
         $(document).ready(ready_qbe);
         $(document).on('page:load', ready_qbe);
 
+ function ready_display(){
+            $(".select2-search").keydown(function(){
+
+              $(".select2-results").css("display", "block");
+               var value=$.trim($(".select2-search input").val());
+
+              if(value.length<2)
+              {
+               $(".select2-results").css("display", "none");
+              }
+      });
+
+          }
+        $(document).ready(ready_display);
+        $(document).on('page:load', ready_display);
 
 function search_bar() {
     $('.searchBar').click(function() {

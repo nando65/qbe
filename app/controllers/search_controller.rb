@@ -1,15 +1,18 @@
 class SearchController < ApplicationController
   def index
-    @users =  User.all
+    @users_following =  current_user.following
+    @users_not_following = User.all.limit(50)
     @filtered_endorsements = Endorsement.all
   end
 
   def search_people
     if params[:query]
-    @users = User.where(nil)
-    @users = @users.first_or_last_name_starts_with(params[:query])
-    elsif params[:subject]
-    @users=User.all
+     @users_following = User.where(nil)
+     @users_following = @users_following.first_or_last_name_starts_with(params[:query])
+     @users_not_following= User.where(nil)
+      @users_not_following = @users_not_following.first_or_last_name_starts_with(params[:query])
+    elsif
+    @users=current_user.following
     end
     render :partial => 'search_people'
   end
