@@ -12,6 +12,8 @@
 //
 //= require select2
 //= require jquery
+//= require post
+//= infinite-scroll
 //= require jquery.turbolinks
 //= require bootstrap-switch
 //= require jquery_ujs

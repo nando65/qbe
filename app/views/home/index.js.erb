@@ -1,0 +1,10 @@
+$('.posts').append("<%= escape_javascript render(:partial => 'posts', locals: {posts: @posts}) %>");
+<% if (@posts.next_page) %>
+
+  //$('.pagination').replaceWith('<%= escape_javascript render(:partial => 'posts', locals: {posts: @posts}) %>');
+  $(alert(<%=@posts.next_page%>));
+<% else %>
+  $('.pagination').remove();
+  $(alert('aaa'));
+<% end %>
+<%= sleep 1 %>
