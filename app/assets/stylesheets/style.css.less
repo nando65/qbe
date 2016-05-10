@@ -27,6 +27,9 @@ body{
   .hide{
     display:none !important;
   }
+   @media (max-width: 325px){
+
+          }//width 767
 }
 
 
@@ -119,13 +122,13 @@ display:inline-block;
           margin:auto;
           text-align:center;
           @media (min-width: 970px) {
-            width:970px;
+
           }//width 970
           @media (max-width: 969px) and (min-width: 768px) {
-            width:768px;
+
           }//width 768
           @media (max-width: 767px){
-            width:400px;
+
           }//width 767
 
           #logo{
@@ -139,8 +142,10 @@ display:inline-block;
           }//w 970
           @media (max-width: 969px) and (min-width: 768px) {
           }//w768
-          @media (max-width: 767px){
-          }//w767
+          @media (max-width: 325px){
+          margin-right:7px;
+          margin-left:5px;
+          }//w325
 
           #logo img{
             width:100%;
@@ -172,7 +177,10 @@ display:inline-block;
             magin-left:20px !important;
             font-size: 11px;
             border-radius: 25px !important;
-
+              @media (max-width: 325px){
+                margin-right:0px;
+                magin-left:0px !important;
+                }//w325
             }//searchBar
 
             .searchBar input{
@@ -181,8 +189,8 @@ display:inline-block;
             magin-left:20px !important;
 
             }//searchBar
-            #notification_bubble img{
 
+            #notification_bubble img{
             width:38px;
             height: 29px;
             float: left;
@@ -190,13 +198,15 @@ display:inline-block;
             margin-left:46px;
             margin-right:0px;
             padding-right:0px;
-
-            }//notification bubble
+              @media (max-width: 325px){
+                margin-right:0px;
+                margin-left:25px;
+                }//w325
+            }//notification bubble img
 
             #user_name{
 
               color: white;
-
               font-size: 15px;
               position:relative;
               padding-top: 20px;
@@ -204,7 +214,25 @@ display:inline-block;
               margin-left:7px;
               padding-left:0px;
 
+              @media (max-width: 325px){
+                display:none;
+                margin-right:0px;
+                margin-left:5px;
+                float:left;
+                }//w325
+
             }//user name
+
+            #user_name_responsive{
+            display:none;
+             @media (max-width: 325px){
+                display:inline-block;
+                color:white;
+                margin-left:15px;
+                padding-top: 15px;
+                float:left;
+                }//w325
+            }//user_name_responsive
 
 
       }//header
@@ -226,19 +254,15 @@ display:inline-block;
 
 
 .col-md-4{
-   @media (min-width: 970px) {
+padding:0px;
+   @media (min-width: 400px) {
             width:400px;
             padding:0px;
-
-          }//width 970
-          @media (max-width: 969px) and (min-width: 768px) {
-
-            text-align:center;
-            float:none;
-          }//width 768
-          @media (max-width: 767px){
-
-          }//width 767
+          }//width 400
+          @media (max-width: 325px){
+          width:100%;
+          padding:0px;
+          }//width 325
 
 }//col md 4
 
@@ -272,6 +296,9 @@ display:inline-block;
         margin-right: 0px;
         padding-top: 15px;
         background: transparent !important;
+         @media (max-width: 325px){
+          margin-left:5px;
+          }//w325
 
         }
 
@@ -283,6 +310,13 @@ display:inline-block;
         margin: 0px;
         padding: 0px;
         margin-top:7px;
+        @media (max-width: 325px){
+          margin-left:15px;
+          width: 35px;
+         height: 35px;
+         margin-top:8px;
+
+          }//w325
         }
 
         .title-subtitle{
@@ -293,6 +327,13 @@ display:inline-block;
           display: inline-block;
           margin-left:0px;
           color:grey;
+          @media (max-width: 325px){
+            font-size:13px !important;
+            width:auto;
+            padding-left: 0px;
+            margin-left:5px;
+
+            }//w325
 
         }
 
@@ -319,6 +360,14 @@ display:inline-block;
         height:100%;
         padding-top:0px;
         padding-bottom:15px;
+          @media (max-width: 325px){
+            margin-right:15px;
+            font-size:13px !important;
+            margin-left:0px;
+            padding-left:0px;
+            width:auto;
+
+            }//w325
         }//notification right
 
         .endorsement_weight{
@@ -329,6 +378,13 @@ display:inline-block;
           color:@green-color-1;
           padding-top: 5px !important;
           background-color: transparent !important;
+          @media (max-width: 325px){
+            margin-left:0px;
+            font-size:29px !important;
+            margin-right:10px;
+            margin-left:0px !important;
+            margin-top:10px;
+            }//w325
         }
 
         .fa-3x{
@@ -482,7 +538,7 @@ display:inline-block;
         }
         .title-subtitle{
           background: transparent !important;
-          width:325px;
+          width:auto;
           padding-top:10px !important;
           padding-left: 20px;
           position: relative;
@@ -493,7 +549,7 @@ display:inline-block;
         }
         .title-subtitle-comment{
           background: transparent !important;
-          width:200px;
+          width:180px;
           margin-top:10px;
           margin-bottom:0px;
           font-size:10px !important;
@@ -558,12 +614,13 @@ display:inline-block;
 .profile{
   background: white;
   color: black;
+  width:100%;
 
         .attributes-display{
           height:280px;
           text-align:center !important;
           color:grey;
-          width: 390px;
+          width: 100%;
           background:white;
           text-align:center;
           margin:auto;
@@ -586,7 +643,7 @@ display:inline-block;
         .picture-row{
         height:125px;
         background: white;
-        width:100%;
+        width:auto;
         margin:0px;
         padding:0px;
         }
@@ -602,6 +659,9 @@ display:inline-block;
         display:inline-block;
         float:left;
         border: 3px white solid;
+        @media (max-width: 325px){
+
+          }//w325
         }
 
         .profile_picture_own_account{
@@ -638,7 +698,7 @@ display:inline-block;
 
         #addVirtue-btn{
           background-color:#c6c6c5;
-          width:146px;
+          width:37%;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -648,10 +708,16 @@ display:inline-block;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 325px){
+          width:32%;
+          text-align: left;
+          padding-left:5px;
+          padding-top:12px;
+          }//w325
         }
         .addVirtue-btn-naranja{
           background-color:orange;
-          width:146px;
+          width:37%;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -661,32 +727,21 @@ display:inline-block;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 325px){
+          width:32%;
+          text-align: left;
+          padding-left:5px;
+          padding-top:12px;
+          }//w325
         }
-
-        #addVirtue-btn img{
-
-          height:35px;
-          width:30px;
-          border:0px;
-          float:right;
-          margin-right:25px;
-          margin-top:-10px;
-          padding-top:0px;
+        .fa-search-plus{
+           @media (max-width: 325px){
+          display:none;
+          }//w325
         }
-        #addVirtue-btn-naranja img{
-
-          height:35px;
-          width:30px;
-          border:0px;
-          float:right;
-          margin-right:25px;
-          margin-top:-10px;
-          padding-top:0px;
-        }
-
         .follow-btn{
           background-color:#c6c6c5;
-          width:146px;
+          width:36%;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -701,7 +756,7 @@ display:inline-block;
         }
         .follow-btn-naranja{
           background-color:orange;
-          width:146px;
+          width:36%;
           height: 45px;
           display: inline-block;
           margin-top:47px;
@@ -713,10 +768,14 @@ display:inline-block;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 325px){
+          width:35%;
+          }//w325
+
         }
         .user-name{
           height:100px;
-          width: 390px;
+          width: 100%;
           background:white;
           text-align:center;
           margin:auto;
@@ -724,10 +783,13 @@ display:inline-block;
         }
 
         #form_advice{
-          width:340px;
+          width:85%;
           background-color:#ebf5f5;
           height:25px;
           border:0px;
+          @media (max-width: 325px){
+          width:80%;
+          }//w325
 
           vertical-align: bottom;
 
@@ -739,11 +801,13 @@ display:inline-block;
           border:0px;
           color:white;
           height:25px;
-          width:50px;
+          width:14%;
           margin-left:-4px;
           font-weight: 700;
            font-style: normal;
-
+           @media (max-width: 325px){
+          width:19%;
+          }//w325
         }//boton send advice
 
         .button-send-advice{
@@ -762,7 +826,6 @@ display:inline-block;
         padding-left:15px;
         padding-top:0px;
         padding-bottom:10px;
-        z-index:300 !important;
         }
         .fa-search{
         color:white;
@@ -771,23 +834,38 @@ display:inline-block;
         }
         fieldset{
         float:left;
+        @media (max-width: 399px){
+          width:100%;
+          }//width 325
         }
         .select2-container{
-        width:278px !important;
+        width:248px !important;
         margin-left:15px;
         position:relative;
         margin-right:2px;
         float:left;
+        @media (max-width: 399px){
+          width:100% !important;
+          }//width 325
+
         }
         #s2id_endorsement_id{
         margin-left:0px !important;
+        @media (max-width: 399px){
+          width:70% !important;
+          }//width 325
         }
         #virtue-combobox{
         float:right;
-        width:320px;
+        width:auto;
         height:auto;
         margin: 10px 20px 0px 10px;
         text-align:left;
+        @media (max-width: 399px){
+          width:90%;
+          float:right;
+          margin-right:-10px;
+          }//width 325
         }
 
 
@@ -813,10 +891,14 @@ display:inline-block;
   border:none !important;
   color:orange;
   text-align:center;
+  @media (max-width: 325px){
+          width:149px;
+          margin-left:10px;
+          }//w325
+
 }
 #search-people-tab a{
   color:orange;
-
   border-radius:0px;
 }
 #search-virtue-tab a{
@@ -835,6 +917,10 @@ display:inline-block;
   color:white !important;
   text-align:center;
   border:none !important;
+  @media (max-width: 325px){
+          width:149px;
+          margin-left:167px;
+          }//w325
 }
 
 .search-green-line{
@@ -878,14 +964,22 @@ display:inline-block;
         border-radius:150px !important;
         display:inline-block;
         float:left;
+        @media (max-width: 325px){
+          margin-right:5px;
+          }//w325
         }
 
         .title-subtitle-search{
         padding-top:12px;
         font-size:12px;
-        padding-left:30px;
-        width:200px;
+        padding-left:15px;
+        width:170px;
         float:left;
+        @media (max-width: 325px){
+          margin-left:0px;
+          padding-left:5px;
+          width:150px;
+          }//w325
 
         }
 
@@ -895,12 +989,18 @@ display:inline-block;
         padding-left:30px;
         width:300px;
         float:left;
+         @media (max-width: 325px){
+          width:149px;
+          }//w325
         }
         .follow-search{
         float:right;
         font-size: 12px;
         color:@green-color-1;
         margin:15px 20px 0px 0px;
+        @media (max-width: 325px){
+          margin-right:5px;
+          }//w325
         }
         .following-search{
         float:right;
@@ -909,6 +1009,9 @@ display:inline-block;
         margin:0px 20px 0px 0px;
         height:100%;
         padding-top:12px;
+        @media (max-width: 325px){
+          margin-right:5px;
+          }//w325
         }
         .following-search-virtue{
         float:right;
@@ -1058,6 +1161,10 @@ position:relative;
   margin-top:40px;
   display:inline-block;
   float:left;
+  @media (max-width: 399px){
+          height:80px;
+          width:80px;
+          }//width 399
 
 }//profile_image
 
@@ -1068,18 +1175,28 @@ position:relative;
   margin-top:40px;
   padding-bottom:10px;
   color:#2f7372;
+
 }
 .job_title{
 width:220px;
 margin-top:5px;
 margin-bottom:5px;
 color:#707070;
+@media (max-width: 399px){
+
+          width:180px;
+          }//width 399
+
 }//job_title
 
 .company_name{
 width:220px;
 margin-bottom:5px;
 color:#707070;
+@media (max-width: 399px){
+
+          width:180px;
+          }//width 399
 }//company name
 
 .btn-update-details{
@@ -1137,7 +1254,7 @@ position:relative;
   background-color:#f4f4f4;
   color:#878787;
   width:100%;
-  height:390px;
+  height:450px;
 }//affinity container
 
 .affinity_introduction{
@@ -1151,7 +1268,7 @@ position:relative;
 
 .affinity_button{
 
-  height:116px;
+  height:auto;
   border-bottom:1px solid #888888;
   display:inline-block;
   width:100%;
@@ -1161,7 +1278,7 @@ position:relative;
 
 .affinity_number{
 
-height:110px;
+height:130px;
 width:135px;
 padding-left:35px;
 font-size:70px;
@@ -1171,19 +1288,25 @@ display:inline-block;
 padding-top:10px;
 color:#5a9897;
 border-bottom:1px solid #888888;
-
+@media (max-width: 399px){
+          width:35%%;
+          }//width 325
 }//affinity_number
 
 .affinity_text{
 
   float:right;
   width:263px;
-  height:110px;
+  height:130px;
   display:inline-block;
   text-align:left;
   color:#777777;
   padding-top:12px;
   border-bottom:1px solid #888888;
+  @media (max-width: 399px){
+          width:65%;
+          font-size:12px;
+          }//width 325
 
 }//affinity_text
 .each-affinity-box{

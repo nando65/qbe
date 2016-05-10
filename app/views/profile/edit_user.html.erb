@@ -2,7 +2,7 @@
 <html>
 <div class="account_box">
   <div class="account_word">
-    Account
+    Detalles
   </div><!--account word-->
 </div><!-- account box -->
 <div class="edit_profile_container">
@@ -13,27 +13,27 @@
       <%= link_to "#{@user.first_name} #{@user.last_name}", :controller => "profile", :action => "index", :subject => @user.id %>
 
       <%=simple_form_for(@user,  url: {action: "update", id: @user.id}, method: :post, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "Current" %></br>
-          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: "Institution/ Company" %></br>
-          <%= f.submit "Update", class: "btn-update-details"  %>
+          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "Actualmente" %></br>
+          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: "Institucion/ Compania" %></br>
+          <%= f.submit "Actualizar", class: "btn-update-details"  %>
         <% end %>
 
     </div> <!--user details -->
   </div><!-- edit profile container -->
   <div class="account_box">
   <div class="account_word">
-    Support
+    Soporte
   </div><!--account word-->
 </div><!-- account box -->
 <div class="support_buttons">
 
 
-<%= link_to 'Report a Problem','#', id: "problems-link", class: "support_one_button", data: { link:  ".problems-section"} %>
+<%= link_to 'Reporta un problema','#', id: "problems-link", class: "support_one_button", data: { link:  ".problems-section"} %>
 <section class="problems-section">
   <%= render partial: 'problem_form', locals: {problem: @problem} %>
 </section>
-<button type="button" class="support_one_button" data-toggle="modal" data-target="#privacyPolicy">Privacy Policy</button>
-<button type="button" class="support_one_button" data-toggle="modal" data-target="#termsAndServices">Terms of Services</button>
+<button type="button" class="support_one_button" data-toggle="modal" data-target="#privacyPolicy">Política de Privacidad</button>
+<button type="button" class="support_one_button" data-toggle="modal" data-target="#termsAndServices">Términos del servicio</button>
 
 
 <!-- Modal -->
@@ -80,7 +80,7 @@
 <!-- fin modal 3-->
 </br></br>
    <div class="support_one_button">
-    <%= link_to('Log out', destroy_user_session_path, :method => :delete) %>
+    <%= link_to('Cerrar Sesión', destroy_user_session_path, :method => :delete) %>
   </div>
   </div><!--support one button-->
   </div><!-- support buttons -->

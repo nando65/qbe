@@ -1,7 +1,7 @@
 <div class="comment-body">
       <div class="comment-counter">
       <% if !i.nil? %>
-       <%= i+1%> of <%= c %>
+       <%= i+1%> de <%= c %>
        <% else %>
        <i class="fa fa-check-circle fa-2x" aria-hidden="true" style="color:green"></i>
       <% end %>
@@ -13,7 +13,7 @@
             <%= d.commentary %>
             <div class="comment-like-btn">
             <% if !current_user.nil? && current_user.likes_comment?(d.id) %>
-            <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
+            <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Me gusta</i>'.html_safe,  {:action => "destroy_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
             <%else%>
             <%= link_to '<i class="fa fa-check" id="like-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
             <%end%>
