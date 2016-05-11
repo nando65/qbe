@@ -4,10 +4,10 @@
                           <li>
                             <%= c.hidden_field :user_id, :value => current_user.id %>
                             <%= c.hidden_field :post_id, :value => t.id %>
-                            <%= c.text_area :commentary, class: "post_control comment_commentary", placeholder: "Write a comment..." %>
+                            <%= c.text_area :commentary, class: "post_control comment_commentary", placeholder: "Deja un comentario..." %>
                           </li>
                           <li>
-                              <%= c.submit 'Send', class: 'button' %>
+                              <%= c.submit 'Enviar', class: 'button' %>
                           </li>
                         </ul>
                       </fieldset>
