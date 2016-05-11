@@ -12,10 +12,17 @@
             </br>
             <%= d.commentary %>
             <div class="comment-like-btn">
+						<% new = false if new.nil? %>
+						<% new_like = '' %>
+						<% new_like = ' like-link-new' if new %>
+						<% destroy_action = 'destroy_like_comment' %>
+						<% destroy_action = 'destroy_like_comment_ajax' if new %> 
+						<% create_action = 'create_like_comment' %>
+						<% create_action = 'create_like_comment_ajax' if new %>
             <% if !current_user.nil? && current_user.likes_comment?(d.id) %>
-            <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => "destroy_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
+							<%= render partial: '/home/destroy_like_comment', locals: { d: d, new_like: new_like, destroy_action: destroy_action } %>
             <%else%>
-            <%= link_to '<i class="fa fa-check" id="like-check" aria-hidden="true"> Like</i>'.html_safe,  {:action => "create_like_comment", :comment_id => d.id, :current_user_id => current_user.id} %>
+							<%= render partial: '/home/create_like_comment', locals: { d: d, new_like: new_like, create_action: create_action } %>
             <%end%>
             <span class="comment-like-count">
                   <% if d.likes.count>0 %>

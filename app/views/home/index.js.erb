@@ -1,10 +1,72 @@
-$('.posts').append("<%= escape_javascript render(:partial => 'posts', locals: {posts: @posts}) %>");
-<% if (@posts.next_page) %>
-
+<% if (@posts.length > 0) %>
+	$('.posts').append("<%= escape_javascript render(:partial => 'posts', locals: {posts: @posts, new: true}) %>");
   //$('.pagination').replaceWith('<%= escape_javascript render(:partial => 'posts', locals: {posts: @posts}) %>');
-  $(alert(<%=@posts.next_page%>));
+
+		//codigo que programa el boton de comentarios en el infinite scroll
+  	$('.comments-link.new-link').each(function(){
+			$(this).click(function(event) {
+    		event.preventDefault();
+    		$( $(this).data('link') ).fadeToggle();
+    		return $($(this).data('link')).find('#comment_commentary').focus();
+  		});
+			$(this).removeClass('new-link');
+		});
+
+
+		//codigo que programa el adjunto del comentario y auto scroll hacie el comentario en el infinte scroll
+	  $('.new_comment.new-comment-form').each(function(){
+	  	$(this).on("ajax:success", function(e, data, status){
+	  	  if(data.result == 'success'){
+	  	    $(this).parents(".post-body").find('.comments').append(data.data);
+	  	    $(this).find('textarea').val('');
+	  	    var com_f = $(this);
+	  	    setTimeout(function(){
+	
+	  	      var com = com_f.parents(".post-body").find('.comments .comment-body:last');
+	  	      $('html, body').animate({
+	  	        scrollTop: com.offset().top - 100
+	  	      }, 500);
+	
+	  	    },100);
+	
+	  	  }else{
+	  	    alert( data.result );
+	  	  }
+	  	}).on("ajax:error", function(e, xhr, status, error){
+	  	  console.log(error);
+	  	});
+			$(this).removeClass('new-comment-form');
+		});
+
+		//hacer like por ajax y share
+
+		prepare_like_link( $('.like-link-new') );
+		
+		function prepare_like_link( links ){
+
+			links.each(function(){
+				$(this).click(function(){
+					var l = $(this);
+					var href = $(this).prop('href');
+					$.ajax( href, {success: function(data){
+						l.replaceWith(data);
+						setTimeout(function(){
+							prepare_like_link( $('.like-link-new') );
+						},100);
+					} } );
+					return false;
+				});
+				$(this).removeClass('like-link-new');
+			});
+
+
+		}
+
+
+
+
+
 <% else %>
   $('.pagination').remove();
-  $(alert('aaa'));
 <% end %>
 <%= sleep 1 %>

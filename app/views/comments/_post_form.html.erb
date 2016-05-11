@@ -1,4 +1,4 @@
- <%= form_for(comment,id: "post-comment-<% t.id% >", remote: true, ) do |c| %>
+ <%= form_for(comment,id: "post-comment-<% t.id% >", remote: true, html: { class: new ? 'new-comment-form new_comment' : 'new_comment' } ) do |c| %>
                       <fieldset>
                         <ul style="list-style:none; padding:0px;">
                           <li>
