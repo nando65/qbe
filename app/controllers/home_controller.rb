@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 
   def index
+		#sign_in User.find 155
     @page = params[:page]
     @page = 1 if params[:page].nil?
     if current_user.feed(0,10).count == 0

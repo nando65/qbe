@@ -59,8 +59,3 @@ test:
 production:
   <<: *default
   database: qbe_production
-  username: root
-  password: <%= ENV['QBE_DATABASE_PASSWORD'] %>
-
-
-

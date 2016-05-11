@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(version: 20160506215628) do
     t.string   "country",                      limit: 255
     t.string   "job_title",                    limit: 255
     t.string   "company_name",                 limit: 255
-    t.boolean  "active_location"
-    t.boolean  "private_advise",                             default: true
+    t.boolean  "active_location",                            default: true
+    t.boolean  "private_advise",                             default: false
     t.string   "facebook_id",                  limit: 255
     t.text     "biography",                    limit: 65535
     t.string   "phone",                        limit: 255
