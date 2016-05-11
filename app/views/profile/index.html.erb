@@ -23,23 +23,23 @@
     </div>
     <div class="picture-row">
     <% if !current_user.nil? && current_user.following?(@user.id) && !(current_user.id==@user.id)%>
-          <%= link_to 'Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "add-virtue-link", class: "addVirtue-btn-naranja", data: { link:  "#add-virtue-section"} %>
+          <%= link_to 'Valorar <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>'.html_safe,'#', id: "add-virtue-link", class: "addVirtue-btn-naranja", data: { link:  "#add-virtue-section"} %>
 
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "-Unfollow", {:action => "destroy_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
+         <%= link_to "-No seguir", {:action => "destroy_follow", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn-naranja" } %>
     <% elsif  !current_user.nil? && current_user.id==@user.id %>
           <div id="addVirtue-btn"></div>
           <%= image_tag (@user.profile_picture.url(:thumb)) %>
-          <%= link_to "Settings", {:controller => "profile", :action =>"edit_user"},  { :class=>"follow-btn" } %>
+          <%= link_to "Configuracion", {:controller => "profile", :action =>"edit_user"},  { :class=>"follow-btn" } %>
 
     <% elsif Notification.find_by(follower_id: current_user.id, user_id: @user.id).nil? && !current_user.following?(@user.id) %>
-          <a href="#" id="addVirtue-btn">Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+          <a href="#" id="addVirtue-btn">Valorar <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "Follow", {:action => "create_follow_request", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
+         <%= link_to "Seguir", {:action => "create_follow_request", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     <% else %>
       <a href="#" id="addVirtue-btn">Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
-         <%= link_to "Requested...", {:controller => "notifications", :action => "destroy_follow_request", :notification_id => Notification.find_by(follower_id: current_user.id, user_id: @user.id).id},  { :class=>"follow-btn" } %>
+         <%= link_to "Solicitado...", {:controller => "notifications", :action => "destroy_follow_request", :notification_id => Notification.find_by(follower_id: current_user.id, user_id: @user.id).id},  { :class=>"follow-btn" } %>
     <% end %>
     </div>
     <section class="add-virtue-section" id="add-virtue-section">
@@ -58,14 +58,14 @@
         <div class="advice">
             <div class="some-advice">
                 <div class="some-advice-for-you">
-                  Some advice for you
+                  Algunas sugerencias
                 </div><!-- some advice for you -->
                 <% if !current_user.nil? && current_user.id==@user.id %>
                   <div class="private-advice">
                       <%if !current_user.private_advise %>
-                      <%= button_to 'Set to Private', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:red !important"}%>
+                      <%= button_to 'Privado', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:red !important"}%>
                       <%else%>
-                      <%= button_to 'Set to Public', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:green !important; color:white;"} %>
+                      <%= button_to 'Publico', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:green !important; color:white;"} %>
                       <%end%><!--if else if-->
                   </div><!-- private advice -->
                 <% end %><!-- if current_user.nil? && current_user.id==@user.id -->

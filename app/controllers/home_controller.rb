@@ -56,7 +56,6 @@ class HomeController < ApplicationController
   def destroy_like_comment_ajax
     Like.destroy_all(user_id: params[:current_user_id], comment_id: params[:comment_id])
 		render partial: '/home/create_like_comment', locals: { d: Comment.find(params[:comment_id]), new_like: ' like-link-new', create_action: 'create_like_comment_ajax' } 
-		#render partial: '/home/create_like_comment'
   end
 
 

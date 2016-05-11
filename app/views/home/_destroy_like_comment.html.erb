@@ -1,1 +1,1 @@
-            <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Like</i>'.html_safe,  {:action => destroy_action, :comment_id => d.id, :current_user_id => current_user.id}, class: 'like-link' + new_like  %>
+            <%= link_to '<i class="fa fa-check" id="like-check-red" aria-hidden="true"> Me Gusta</i>'.html_safe,  { controller: '/home', :action => destroy_action, :comment_id => d.id, :current_user_id => current_user.id}, class: 'like-link' + new_like  %>

@@ -1,1 +1,1 @@
-                    <%= link_to ('<i class="fa fa-check" aria-hidden="true"> Like</i>').html_safe,  {:action => create_action, :post_id => t.id, :current_user_id => current_user.id}, class: 'like-link' + new_class  %>
+                    <%= link_to ('<i class="fa fa-check" aria-hidden="true"> Me Gusta</i>').html_safe,  {controller: '/home', :action => create_action, :post_id => t.id, :current_user_id => current_user.id}, class: 'like-link' + new_class  %>

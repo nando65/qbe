@@ -1,8 +1,8 @@
 <%= form_for(advise, id:'new_advise', remote: true) do |c| %>
           <%= c.hidden_field :gives_advice_to, :value => current_user.id %>
           <%= c.hidden_field :receives_advice_from, :value => @user.id %>
-          <%= c.text_area :advise, id: 'form_advice', class: "post_control advise_advise", placeholder: "Give me some advice" %>
+          <%= c.text_area :advise, id: 'form_advice', class: "post_control advise_advise", placeholder: "Dime en qué debo mejorar" %>
           <span class="button-send-advice">
-          <%= submit_tag "Send", class:"btn-send-advice" %>
+          <%= submit_tag "Enviar", class:"btn-send-advice" %>
         </span>
           <% end %>

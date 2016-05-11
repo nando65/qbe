@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-    render json:{ result: :success, data: render_to_string( partial: '/comments/comment', locals: {d: @comment, i: nil} ) }
+    render json:{ result: :success, data: render_to_string( partial: '/comments/comment', locals: {d: @comment, i: nil, new: true} ) }
     else
     render json:{ result: :error, data: @comment.errors.full_messages.first }
     end
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     s = ''
     i = params[:last_comment].to_i
     @comments.each do |c|
-      s += render_to_string( partial: '/comments/comment', locals: {d: c, i: i, c: @post.comments.length} )
+      s += render_to_string( partial: '/comments/comment', locals: {d: c, i: i, c: @post.comments.length, new: true} )
       i = i + 1
     end
     render json: {  html: s, new_last_comment: i  }

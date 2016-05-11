@@ -7,6 +7,7 @@ function ready(){
       var com_f = $(this);
       setTimeout(function(){
 
+				prepare_like_link( $('.like-link-new') );
         var com = com_f.parents(".post-body").find('.comments .comment-body:last');
         $('html, body').animate({
           scrollTop: com.offset().top - 100
@@ -20,6 +21,29 @@ function ready(){
   }).on("ajax:error", function(e, xhr, status, error){
     console.log(error);
   });
+
+		
+		function prepare_like_link( links ){
+
+			links.each(function(){
+				$(this).click(function(){
+					var l = $(this);
+					var href = $(this).prop('href');
+					$.ajax( href, {success: function(data){
+						l.replaceWith(data);
+						setTimeout(function(){
+							prepare_like_link( $('.like-link-new') );
+						},100);
+					} } );
+					return false;
+				});
+				$(this).removeClass('like-link-new');
+			});
+
+
+		}
+
+
 
   $('.show-more-comments-link').click(function(){
     var lc = $(this).siblings('.last-comment').val();
@@ -39,6 +63,9 @@ function ready(){
         }
         sml.parents('.comments').find('.comment-body:last').after(data.html);
         sml.siblings('.last-comment').val( data.new_last_comment );
+				setTimeout(function(){
+					prepare_like_link( $('.like-link-new') );
+				},100);
       }, error: function(){
         alert('Sorry, could not load new comments. Please try again.');
       },

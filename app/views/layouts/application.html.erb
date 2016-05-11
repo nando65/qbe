@@ -24,6 +24,7 @@
             <%= link_to(image_tag('notification_bubble.svg'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
             <% if current_user %>
             <%= link_to(current_user.first_name+" "+current_user.last_name[0],{:controller => "profile", :action => "index", :subject => current_user.id}, id:'user_name')  %>
+            <%= link_to '<i class="fa fa-user fa-2x" aria-hidden="true"></i>'.html_safe,{:controller => "profile", :action => "index", :subject => current_user.id}, id:'user_name_responsive'  %>
             <% end %>
       </div> <!-- header -->
 </div> <!-- header wrapper-->

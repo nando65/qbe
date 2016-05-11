@@ -9,7 +9,7 @@
                               <div class="title-subtitle-search">
                           <%= link_to "#{u.first_name} #{u.last_name}", :controller => "profile", :action => "index", :subject => u.id %>
                             </div><!--title-subtitle-->
-                            <div class="following-search">Following <i class="fa fa-check-circle" aria-hidden="true"></i></div>
+                            <div class="following-search">Siguiendo <i class="fa fa-check-circle" aria-hidden="true"></i></div>
           </div><!--row-->
           <%end%>
           <%end%>
@@ -23,7 +23,7 @@
                   <div class="title-subtitle-search">
                     <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
                   </div>
-                  <%= link_to "+Follow", {:controller => "profile", :action => "create_follow_request", :subject => t.id, :follower => current_user.id}, :class=>"follow-search" %>
+                  <%= link_to "+Seguir", {:controller => "profile", :action => "create_follow_request", :subject => t.id, :follower => current_user.id}, :class=>"follow-search" %>
                 </div><!--row-->
           <% end %>
         <% end %>

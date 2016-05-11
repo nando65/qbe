@@ -1,7 +1,8 @@
- <div class="posts">
+<div id="posts">
   <% if @posts.nil? %>
         <% @last_users.each do |t| %>
           <% if Notification.find_by(follower_id: current_user.id, user_id: t.id).nil? && !current_user.following?(t.id)%>
+
             <div class="row row-striped">
             <div class="post-body-home-no-posts">
                   <div class="profile-picture-home-no-posts">
@@ -13,9 +14,12 @@
                   <%= link_to "+Follow", {:controller => "profile", :action => "create_follow_request", :subject => t.id, :follower => current_user.id},  { :class=>"follow-home" } %>
                 </div><!--post body-->
                 </div><!--row-->
+
           <% end %>
         <% end %>
+</div><!--posts-->
       <% else %>
+<div class="posts">
   <%= render(partial: 'posts', locals: {posts: @posts}) %>
 </div><!--posts-->
 

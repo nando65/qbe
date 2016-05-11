@@ -8,9 +8,9 @@
                             <%= c.hidden_field :follower_id, :value => current_user.id %>
                             <i class="fa fa-search fa-2x" aria-hidden="true"></i>
                             <div id="virtue-combobox">
-                            <%=c.select_tag :endorsement_id, options_for_select(@endorsements.all.map { |p| [ p.name, p.id ]  }),name: 'endorse[endorsement_id]', class: "endorsement", :prompt => 'Select Endorsement...'  %>
+                            <%=c.select_tag :endorsement_id, options_for_select(@endorsements.all.map { |p| [ p.name, p.id ]  }),name: 'endorse[endorsement_id]', class: "endorsement", :prompt => 'Seleccionar atributo...'  %>
 
-                              <%= c.submit 'add', class: 'button', style: "background-color:white; color:orange; border:none" %>
+                              <%= c.submit 'Agregar', class: 'button', style: "background-color:white; color:orange; border:none" %>
                             </div>
                           </li>
                         </ul>
