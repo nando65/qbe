@@ -9,7 +9,7 @@ if Rails.env.development?
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 end
     #config.omniauth :facebook, '602229859946017', '1b6deddee6b256a7222964850f4ce1a8', scope: 'email,user_friends'
-    config.omniauth :facebook, '602229859946017', '1b6deddee6b256a7222964850f4ce1a8', scope: 'email,user_friends,public_profile,user_location', info_fields: 'email,first_name, last_name, gender, picture, location'
+    config.omniauth :facebook, '602226299946373', '1d9d739200590f4d66a28b39bdc97a8f', scope: 'email,user_friends,public_profile,user_location', info_fields: 'email,first_name, last_name, gender, picture, location'
 
 
 
