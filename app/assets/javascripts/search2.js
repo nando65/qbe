@@ -11,7 +11,7 @@
               $(".select2-results").css("display", "block");
                var value=$.trim($(".select2-search input").val());
 
-              if(value.length<2)
+              if(value.length<4)
               {
                $(".select2-results").css("display", "none");
               }

@@ -13,8 +13,8 @@
       <%= link_to "#{@user.first_name} #{@user.last_name}", :controller => "profile", :action => "index", :subject => @user.id %>
 
       <%=simple_form_for(@user,  url: {action: "update", id: @user.id}, method: :post, html: { class: 'form-horizontal' }) do |f|%>
-          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "Actualmente" %></br>
-          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: "Institucion/ Compania" %></br>
+          <%= f.text_field :job_title, hide_label: true, class: 'job_title', placeholder: "¿A qué te dedicas?" %></br>
+          <%= f.text_field :company_name, hide_label: true, class: 'company_name', placeholder: "¿En dónde?" %></br>
           <%= f.submit "Actualizar", class: "btn-update-details"  %>
         <% end %>
 
@@ -28,7 +28,7 @@
 <div class="support_buttons">
 
 
-<%= link_to 'Reporta un problema','#', id: "problems-link", class: "support_one_button", data: { link:  ".problems-section"} %>
+<%= link_to 'Contacta con nosotros','#', id: "problems-link", class: "support_one_button", data: { link:  ".problems-section"} %>
 <section class="problems-section">
   <%= render partial: 'problem_form', locals: {problem: @problem} %>
 </section>

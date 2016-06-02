@@ -1,4 +1,4 @@
-<%= form_for(endorse,id: "add-virtue", remote: true, ) do |c| %>
+<%= form_for(endorse,id: "add-virtue" ) do |c| %>
 
       <div class="add-virtue-container">
                       <fieldset>
@@ -10,7 +10,7 @@
                             <div id="virtue-combobox">
                             <%=c.select_tag :endorsement_id, options_for_select(@endorsements.all.map { |p| [ p.name, p.id ]  }),name: 'endorse[endorsement_id]', class: "endorsement", :prompt => 'Seleccionar atributo...'  %>
 
-                              <%= c.submit 'Agregar', class: 'button', style: "background-color:white; color:orange; border:none" %>
+                              <%= c.submit 'Agregar', class: 'button', style: "background-color:white; color:orange; border:none", data: { disable_with: "Wait.." } %>
                             </div>
                           </li>
                         </ul>

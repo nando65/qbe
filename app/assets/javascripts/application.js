@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require select2
 //= require jquery
+//= require select2
 //= require post
 //= infinite-scroll
 //= require jquery.turbolinks

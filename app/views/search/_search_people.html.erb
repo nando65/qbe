@@ -37,7 +37,7 @@
                   <div class="title-subtitle-search">
                     <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>
                   </div>
-                  <%= link_to "Requested", {:controller => "notifications", :action => "destroy_follow_request", :notification_id => Notification.find_by(follower_id: current_user.id, user_id: t.id).id}, :class=>"follow-search" %>
+                  <%= link_to "Pendiente", {:controller => "notifications", :action => "destroy_follow_request", :notification_id => Notification.find_by(follower_id: current_user.id, user_id: t.id).id}, :class=>"follow-search" %>
                 </div><!--row-->
           <% end %>
         <% end %>

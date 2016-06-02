@@ -55,7 +55,7 @@ body{
 .home img{
 
   margin:auto;
-  margin-top:40%;
+  margin-top:10%;
   display:block;
   position:relative;
 
@@ -421,6 +421,9 @@ padding:0px;
         padding:0px;
         }
 
+        .fa-share{
+        display: none !important;
+        }
         .profile-picture-home-no-posts img{
 
         width: 50px;
@@ -431,9 +434,14 @@ padding:0px;
         display:inline-block;
         float:left;
         }
+        .profile-picture-home-no-posts {
+        display:inline-block;
+        float:left;
+        }
         .post-body-home-no-posts{
         height:auto;
         padding:15px 0px 20px 0px;
+
         }
         .comments{
         margin-bottom:10px;
@@ -500,6 +508,17 @@ padding:0px;
         height: 50px;
         border-radius: 150px !important;
         margin: 20px 0 10px 0;
+        padding: 0px;
+        margin-left:10px;
+
+        }
+
+        a img{
+
+        width: 50px;
+        height: 50px;
+        border-radius: 150px !important;
+        margin: 0px 0 10px 0;
         padding: 0px;
         margin-left:10px;
 
@@ -572,7 +591,7 @@ padding:0px;
         .fa{
         margin-right:15px;
         margin-top:10px;
-        display:inline-block !important;
+        display:inline-block;
 
         }
         #like-check-red{
@@ -616,7 +635,7 @@ padding:0px;
   width:100%;
 
         .attributes-display{
-          height:280px;
+          height:250px;
           text-align:center !important;
           color:grey;
           width: 100%;
@@ -658,9 +677,7 @@ padding:0px;
         display:inline-block;
         float:left;
         border: 3px white solid;
-        @media (max-width: 325px){
 
-          }//w325
         }
 
         .profile_picture_own_account{
@@ -707,6 +724,12 @@ padding:0px;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 399px){
+          width:28%;
+          text-align: left;
+          padding-left:5px;
+          padding-top:12px;
+          }//w399
           @media (max-width: 325px){
           width:32%;
           text-align: left;
@@ -726,6 +749,12 @@ padding:0px;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 399px){
+          width:28%;
+          text-align: left;
+          padding-left:5px;
+          padding-top:12px;
+          }//w399
           @media (max-width: 325px){
           width:32%;
           text-align: left;
@@ -752,6 +781,15 @@ padding:0px;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 399px){
+          width:29%;
+          font-size:12px;
+          text-align:right;
+          padding-right:5px;
+          }//w399
+          @media (max-width: 325px){
+          width:35%;
+          }//w325
         }
         .follow-btn-naranja{
           background-color:orange;
@@ -767,6 +805,9 @@ padding:0px;
           float:left;
           color:white;
           text-decoration:none;
+          @media (max-width: 399px){
+          width:29%;
+          }//w399
           @media (max-width: 325px){
           width:35%;
           }//w325
@@ -1253,13 +1294,13 @@ position:relative;
   background-color:#f4f4f4;
   color:#878787;
   width:100%;
-  height:450px;
+  height:530px;
 }//affinity container
 
 .affinity_introduction{
   padding-top:10px;
   border-bottom:1px solid #888888;
-  height:60px;
+  height:140px;
   text-align:left;
   padding-left:15px;
 

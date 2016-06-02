@@ -5,13 +5,13 @@
       <div class="post-body">
           <% if t.shared_post %>
             <div class="person_sharing">
-              <i class="fa fa-retweet" aria-hidden="true"></i> <%=link_to t.person_sharing, :controller => "profile", :action => "index", :subject => t.person_sharing_id %>
+              <i class="fa fa-retweet" aria-hidden="true"></i> <%=link_to t.person_sharing, :controller => "profile", :action => "index", :subject => t.person_sharing_id, 'data-no-turbolink' => true %>
             </div>
             <% end %>
             <% if t.shared_post || !t.shared_post %>
-                <%= image_tag (t.user.profile_picture.url(:thumb)), class:"profile-picture" %>
+               <%= link_to "#{image_tag (t.user.profile_picture.url(:thumb))}".html_safe, :controller => "profile", :action => "index", :subject => t.user.id, class:"profile-picture", 'data-no-turbolink' => true %>
               <div class="title-subtitle">
-                <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
+                <%= link_to t.title, {:controller => "profile", :action => "index", :subject => t.user_id}, {'data-no-turbolink' => true} %>
                 </br>
                 <% case t.post_type %>
                 <% when 1 %>
@@ -22,10 +22,10 @@
                  <%= t.subtitle %>
                 <% end %>
               </br>
-										<% new_class = '' %> 
+										<% new_class = '' %>
 										<% new_class = ' like-link-new' if new %>
 										<% destroy_action = 'destroy_like' %>
-										<% destroy_action = 'destroy_like_ajax' if new %> 
+										<% destroy_action = 'destroy_like_ajax' if new %>
 										<% create_action = 'create_like' %>
 										<% create_action = 'create_like_ajax' if new %>
 

@@ -3,7 +3,7 @@ class Endorsement < ActiveRecord::Base
   has_many :endorses
   scope :endorsement_name_starts_with, -> (query) { where("name LIKE ? ","%#{query}%")}
 
-def inser_attributes
+def self.inser_attributes
     a=[
       'honesto',
 'honesta',

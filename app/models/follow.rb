@@ -36,6 +36,15 @@ class Follow < ActiveRecord::Base
     notification.notification_type = 7
     notification.follower_id = self.follower.id
     notification.save
+
+    notification2 = Notification.new
+    notification2.user = self.follower
+    notification2.title = self.subject.first_name+" "+self.subject.last_name
+    notification2.subtitle = "Has accepted your request"
+    notification2.image = self.subject.profile_picture
+    notification2.notification_type = 8
+    notification2.follower_id = self.subject.id
+    notification2.save
     end
   end
 end

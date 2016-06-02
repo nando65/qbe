@@ -6,7 +6,7 @@
             <div class="row row-striped">
             <div class="post-body-home-no-posts">
                   <div class="profile-picture-home-no-posts">
-                    <%= image_tag (t.profile_picture.url(:thumb)) %>
+                    <%= link_to "#{image_tag (t.profile_picture.url(:thumb))}".html_safe, :controller => "profile", :action => "index", :subject => t.id%>
                   </div><!--profile picture-->
                   <div class="title-subtitle">
                     <%= link_to "#{t.first_name} #{t.last_name}", :controller => "profile", :action => "index", :subject => t.id %>

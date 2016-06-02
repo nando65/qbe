@@ -1,2 +1,2 @@
-is <span style="color:orange">following </span><span><%= link_to " "+User.find_by(id: t.follower_id).first_name+" "+User.find_by(id: t.follower_id).last_name, {:controller => "profile", :action => "index", :subject => t.user_id}, {style: "color:blue !important"}  %></span>
+Está <span style="color:orange">siguiendo</span> a <span><%= link_to " "+User.find_by(id: t.follower_id).first_name+" "+User.find_by(id: t.follower_id).last_name, {:controller => "profile", :action => "index", :subject => t.follower_id}, {style: "color:blue !important", 'data-no-turbolink' => true} %></span>
 

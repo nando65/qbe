@@ -7,6 +7,7 @@
 <div class="profile">
       <div class="attributes-display">
         <div class="cloudtag">
+      <% if !current_user.nil? && (current_user.following?(@user.id) || current_user.id==@user.id)%>
           <% if @user.attributes_and_weight %>
               <% @user.attributes_and_weight.each do |key, value| %>
                   <%
@@ -18,6 +19,7 @@
                   </div>
               <% end %>
            <% end %>
+       <% end %>
           <span class="clearer"></span>
       </div>
     </div>
@@ -37,7 +39,7 @@
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
          <%= link_to "Seguir", {:action => "create_follow_request", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     <% else %>
-      <a href="#" id="addVirtue-btn">Add Virtue <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+      <div id="addVirtue-btn"></div>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
          <%= link_to "Solicitado...", {:controller => "notifications", :action => "destroy_follow_request", :notification_id => Notification.find_by(follower_id: current_user.id, user_id: @user.id).id},  { :class=>"follow-btn" } %>
     <% end %>
@@ -48,34 +50,35 @@
     <div class="user-name">
       </br><%= @user.first_name %> <%= @user.last_name %></br>
       <%= @user.job_title %></br>
-      @<%= @user.company_name %>
+      <%= @user.company_name %>
     </div>
        <% if !current_user.nil? && current_user.following?(@user.id) && current_user.id != @user.id %>
           <%= render partial: '/advise/advise_form', locals: {advise: @advise} %>
         <% end %>
+      <% if !current_user.nil? && (current_user.following?(@user.id) || current_user.id==@user.id)%>
+            <% if !@user.private_advise || @user.id == current_user.id %>
+            <div class="advice">
+                <div class="some-advice">
+                    <div class="some-advice-for-you">
+                      Sugerencias de amigos
+                    </div><!-- some advice for you -->
+                    <% if !current_user.nil? && current_user.id==@user.id %>
+                      <div class="private-advice">
+                          <%if !current_user.private_advise %>
+                          <%= button_to 'Privadas', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:red !important"}%>
+                          <%else%>
+                          <%= button_to 'Públicas', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:green !important; color:white;"} %>
+                          <%end%><!--if else if-->
+                      </div><!-- private advice -->
+                    <% end %><!-- if current_user.nil? && current_user.id==@user.id -->
+                </div><!-- some advice -->
 
-        <% if !@user.private_advise || @user.id == current_user.id %>
-        <div class="advice">
-            <div class="some-advice">
-                <div class="some-advice-for-you">
-                  Algunas sugerencias
-                </div><!-- some advice for you -->
-                <% if !current_user.nil? && current_user.id==@user.id %>
-                  <div class="private-advice">
-                      <%if !current_user.private_advise %>
-                      <%= button_to 'Privado', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:red !important"}%>
-                      <%else%>
-                      <%= button_to 'Publico', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:green !important; color:white;"} %>
-                      <%end%><!--if else if-->
-                  </div><!-- private advice -->
-                <% end %><!-- if current_user.nil? && current_user.id==@user.id -->
-            </div><!-- some advice -->
-
-              <span class="advices-display">
-                    <%= render partial: '/advise/advises', locals: {advices: @advices} %>
-              </span>
-        </div><!-- advice -->
-        <%end%>
+                  <span class="advices-display">
+                        <%= render partial: '/advise/advises', locals: {advices: @advices} %>
+                  </span>
+            </div><!-- advice -->
+            <%end%>
+      <%end%>
 </div>
 
 

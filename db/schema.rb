@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506215628) do
+ActiveRecord::Schema.define(version: 20160531205741) do
 
   create_table "advises", force: :cascade do |t|
     t.integer  "gives_advice_to",      limit: 4,     null: false
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 20160506215628) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",            limit: 4
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "title",              limit: 255
     t.text     "subtitle",           limit: 65535
     t.string   "image_file_name",    limit: 255
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20160506215628) do
     t.integer  "notification_type",  limit: 4
     t.integer  "endorse_weight",     limit: 4
     t.integer  "follower_id",        limit: 4
+    t.boolean  "unread",                           default: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -150,8 +151,8 @@ ActiveRecord::Schema.define(version: 20160506215628) do
     t.string   "country",                      limit: 255
     t.string   "job_title",                    limit: 255
     t.string   "company_name",                 limit: 255
-    t.boolean  "active_location",                            default: true
-    t.boolean  "private_advise",                             default: false
+    t.boolean  "active_location"
+    t.boolean  "private_advise",                             default: true
     t.string   "facebook_id",                  limit: 255
     t.text     "biography",                    limit: 65535
     t.string   "phone",                        limit: 255

@@ -2,14 +2,14 @@ class ProfileController < ApplicationController
 
   def index
     if params[:subject]
-    @user = User.find_by(id: params[:subject])
-    @advices = User.find_by(id: params[:subject]).advises.order('created_at DESC')
-    @endorse_filter=Endorse.where(follower_id=current_user.id && subject_id=params[:subject])
-    array=[]
-    @endorse_filter.each do |e|
-      array<< e.endorsement_id
-    end
-    @endorsements = Endorsement.where.not(id: array)
+        @user = User.find_by(id: params[:subject])
+        @advices = User.find_by(id: params[:subject]).advises.order('created_at DESC')
+        @endorse_filter=Endorse.where(:follower_id=>current_user.id, :subject_id=>params[:subject])
+        @array=[]
+        @endorse_filter.each do |e|
+          @array<< e.endorsement_id
+        end
+        @endorsements = Endorsement.where.not(id: @array)
     else
     @user = current_user
     @advices = current_user.advises_display(0,10)
@@ -25,10 +25,18 @@ class ProfileController < ApplicationController
     @problem = Problem.new
   end
 
+  def first_time_user_details
+    if current_user.company_name.nil?
+      redirect_to action: :edit_user
+    else
+      redirect_to controller: :home, action: :index
+    end
+  end
+
   def update
     @user = User.find_by(id: current_user.id)
     if @user.update user_params
-      redirect_to action: :edit_user
+      redirect_to controller: :home, action: :index
     else
       render :edit_user
     end

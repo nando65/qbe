@@ -9,7 +9,7 @@
               </div><!--profile picture-->
 
               <div class="title-subtitle">
-                <%= link_to t.title, :controller => "profile", :action => "index", :subject => t.follower_id %>
+                <%= link_to t.title, {:controller => "profile", :action => "index", :subject => t.follower_id}, {'data-no-turbolink' => true} %>
               </br>
                 <% case t.notification_type %>
                   <% when 1 %>
@@ -26,6 +26,8 @@
                   <%= render partial: 'notification_type6', locals: {t: t} %>
                   <% when 7 %>
                   <%= render partial: 'notification_type7', locals: {t: t} %>
+                  <% when 8 %>
+                  <%= render partial: 'notification_type8', locals: {t: t} %>
                 <% else %>
                  <%= t.subtitle %>
                 <% end %>
@@ -43,7 +45,7 @@
               <% end %>
              </div><!--width-center-column -->
       <% end %><!--notifications each-->
-      <%= paginate @notifications, theme: 'twitter-bootstrap-3' %>
+
     </div><!--row-->
   </div><!--notifications-->
 </html>

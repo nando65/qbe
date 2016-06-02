@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
   has_many :advises, foreign_key: :receives_advice_from, class_name: 'Advise',dependent: :destroy
 
-  has_many :comments
+  has_many :comments, dependent: :delete_all
 
 
   has_many :endorses_endorser, foreign_key: :subject_id, class_name: 'Endorse'
@@ -115,8 +115,8 @@ class User < ActiveRecord::Base
   #                    OR user_id = :user_id", user_id: id).page(page).per(per)
   # end
 
-  def notifications_display(page, per) #funciona, falta entender bien como funciona paginacion kaminari
-  notifications.page(page).per(per)
+  def notifications_display #funciona, falta entender bien como funciona paginacion kaminari
+  notifications.order('created_at DESC').limit(30)
   end
 
   def advises_display(page, per) #funciona, falta entender bien como funciona paginacion kaminari

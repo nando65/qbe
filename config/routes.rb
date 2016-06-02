@@ -19,7 +19,7 @@ match ':controller(/:action(:/id))', :via => [:post, :get]
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'notifications#index'
+  root 'profile#first_time_user_details'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
