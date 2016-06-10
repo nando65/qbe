@@ -5,10 +5,10 @@ class NotificationsController < ApplicationController
     page = params[:page]
     page = 1 if page.nil?
     @notifications = User.find_by(id: current_user.id).notifications_display
-    @unread = current_user.notifications.where(unread: 1)
-    @unread.each do |u|
-      u.unread = 0
-      u.save
+     @unread = current_user.notifications.where(unread: 1)
+     @unread.each do |u|
+       u.unread = 0
+       u.save
     end
   end
   # def select_affinity
