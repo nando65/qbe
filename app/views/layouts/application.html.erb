@@ -23,9 +23,9 @@
             </div>
             <% if current_user.notifications.where(unread: 1).exists? %>
 
-           <%= link_to "red",  {controller: '/notifications', action: :index}, id: 'notification_bubble' %>
+           <%= link_to(image_tag('boton_notificaciones_alerta.png'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
             <% else %>
-            <%= link_to(image_tag('notification_bubble.svg'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
+            <%= link_to(image_tag('boton_notificaciones.png'),  {controller: '/notifications', action: :index}, id: 'notification_bubble') %>
             <% end %>
             <% if current_user %>
             <%= link_to(current_user.first_name+" "+current_user.last_name[0],{:controller => "profile", :action => "index", :subject => current_user.id}, id:'user_name')  %>

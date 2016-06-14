@@ -36,7 +36,7 @@ class NotificationsController < ApplicationController
   end
   def destroy_follow_request
     Notification.destroy_all(id: params[:notification_id])
-    redirect_to controller: :home, action: :index
+    redirect_to :back
   end
 
   private

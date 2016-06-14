@@ -7,6 +7,7 @@ resources :problems
 resources :endorses
 resources :advises
 resources :notifications
+resources :posts
 
 match 'profile/update/:id', to: 'profile#update', :via => [:post]
 match 'comments/get_next_three', to: 'comments#get_next_three', via: [:post]

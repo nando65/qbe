@@ -7,19 +7,44 @@
 <div class="profile">
       <div class="attributes-display">
         <div class="cloudtag">
-      <% if !current_user.nil? && (current_user.following?(@user.id) || current_user.id==@user.id)%>
-          <% if @user.attributes_and_weight %>
-              <% @user.attributes_and_weight.each do |key, value| %>
-                  <%
-                    w = 8 * value.to_i
-                    w = 50 if w > 50
-                  %>
-                  <div class="tag" style="font-size:<%= w %>px; text-align:center!important;">
-                    <%= key[0] %>
-                  </div>
-              <% end %>
+
+      <% if !current_user.nil? && (current_user.following?(@user.id) && current_user.id!=@user.id)%>
+           <% case @user.count_endorses_from_specific_user(@user.id, current_user.id) %>
+                  <% when 0 %>
+                  <%= "Debes hacer 3 valoraciones para ver los atributos" %>
+                  <% when 1 %>
+                  <%= "Debes hacer 2 valoraciones mas para ver los atributos" %>
+                  <% when 2 %>
+                  <%= "Debes hacer 1 valoracion mas para ver los atributos" %>
+                  <% else %>
+              <% if @user.attributes_and_weight %>
+                  <% @user.attributes_and_weight.each do |key, value| %>
+                      <%
+                        w = 8 * value.to_i
+                        w = 50 if w > 50
+                      %>
+                      <div class="tag" style="font-size:<%= w %>px; text-align:center!important;">
+                        <%= key[0] %>
+                      </div>
+                  <% end %>
+               <% end %>
            <% end %>
        <% end %>
+        <% if !current_user.nil? && current_user.id==@user.id%>
+        <% if @user.attributes_and_weight %>
+                  <% @user.attributes_and_weight.each do |key, value| %>
+                      <%
+                        w = 8 * value.to_i
+                        w = 50 if w > 50
+                      %>
+                      <div class="tag" style="font-size:<%= w %>px; text-align:center!important;">
+                        <%= key[0] %>
+                      </div>
+                  <% end %>
+               <% end %>
+        <% end %>
+
+
           <span class="clearer"></span>
       </div>
     </div>
@@ -35,7 +60,7 @@
           <%= link_to "Configuracion", {:controller => "profile", :action =>"edit_user"},  { :class=>"follow-btn" } %>
 
     <% elsif Notification.find_by(follower_id: current_user.id, user_id: @user.id).nil? && !current_user.following?(@user.id) %>
-          <a href="#" id="addVirtue-btn">Valorar <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i></a>
+          <a href="#" id="addVirtue-btn"></a>
              <%= image_tag (@user.profile_picture.url(:thumb)) %>
          <%= link_to "Seguir", {:action => "create_follow_request", :subject => @user.id, :follower => current_user.id},  { :class=>"follow-btn" } %>
     <% else %>
@@ -65,9 +90,9 @@
                     <% if !current_user.nil? && current_user.id==@user.id %>
                       <div class="private-advice">
                           <%if !current_user.private_advise %>
-                          <%= button_to 'Privadas', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:red !important"}%>
+                          <%= button_to 'Privadas', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:transparent !important; color: red; border:none"}%>
                           <%else%>
-                          <%= button_to 'Públicas', {:action => "update_private_advise", :private_advise => 0},{:style =>"background-color:green !important; color:white;"} %>
+                          <%= button_to 'Públicas', {:action => "update_private_advise", :private_advise => 1},{:style =>"background-color:transparent !important; color:green; border:none;"} %>
                           <%end%><!--if else if-->
                       </div><!-- private advice -->
                     <% end %><!-- if current_user.nil? && current_user.id==@user.id -->

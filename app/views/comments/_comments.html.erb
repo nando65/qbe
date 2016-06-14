@@ -5,6 +5,6 @@
   <%end%>
   <input type="hidden" class="last-comment" value="3">
   <input type="hidden" class="post-info" value="<%= t.id %>">
-<% if t.comments.length > 3 %>
-  <%= link_to 'Mostrar más', '#', class:'show-more-comments-link' %>
+<% if t.comments.length > n %>
+  <%= link_to 'Mostrar más...', '#', class:'show-more-comments-link' %>
 <% end %>

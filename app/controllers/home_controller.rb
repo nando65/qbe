@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 		#sign_in User.find 155
     @page = params[:page]
     @page = 1 if params[:page].nil?
+    @post = Post.new
     if current_user.feed(0,10).count == 0
     	@last_users = User.first(20).reverse
     else
@@ -11,6 +12,8 @@ class HomeController < ApplicationController
     end
     @comment = Comment.new
   end
+
+
 
   def create_share
     Post.share_post(params[:post_id], params[:current_user_id])
@@ -22,14 +25,14 @@ class HomeController < ApplicationController
     redirect_to :controller => 'home', :action => 'index'
   end
 
+  def create_like_ajax
+    Like.like(params[:post_id], params[:current_user_id])
+    render partial: '/home/destroy_like', locals: { t: Post.find(params[:post_id]), new_class: ' like-link-new', destroy_action: 'destroy_like_ajax' }
+  end
+
   def destroy_like
     Like.destroy_all(user_id: params[:current_user_id], post_id: params[:post_id])
     redirect_to controller: :home, action: :index
-  end
-
- 	def create_like_ajax
-    Like.like(params[:post_id], params[:current_user_id])
-		render partial: '/home/destroy_like', locals: { t: Post.find(params[:post_id]), new_class: ' like-link-new', destroy_action: 'destroy_like_ajax' }
   end
 
   def destroy_like_ajax
@@ -58,6 +61,7 @@ class HomeController < ApplicationController
     Like.destroy_all(user_id: params[:current_user_id], comment_id: params[:comment_id])
 		render partial: '/home/create_like_comment', locals: { d: Comment.find(params[:comment_id]), new_like: ' like-link-new', create_action: 'create_like_comment_ajax' }
   end
+
 
 
 end

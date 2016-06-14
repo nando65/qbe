@@ -22,7 +22,7 @@ function ready(){
     console.log(error);
   });
 
-		
+
 		function prepare_like_link( links ){
 
 			links.each(function(){

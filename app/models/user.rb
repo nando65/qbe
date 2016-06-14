@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     # f.save
   end
 
+  def count_endorses_from_specific_user(subject_id, current_user_id)
+    u = User.find_by(id: subject_id)
+    u.endorses_endorser.where(follower_id: current_user_id).count
+  end
 
   def self.from_omniauth(auth)
 

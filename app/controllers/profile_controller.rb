@@ -53,12 +53,12 @@ class ProfileController < ApplicationController
 
   def create_follow_request
     User.create_follow_notification(params[:subject], params[:follower])
-    redirect_to :controller => 'home', :action => 'index'
+    redirect_to :back
   end
 
   def destroy_follow
     Follow.destroy_all(subject_id: params[:subject], follower_id: params[:follower])
-    redirect_to controller: :home, action: :index
+    redirect_to :back
   end
 
 

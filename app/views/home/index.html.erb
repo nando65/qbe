@@ -1,4 +1,14 @@
 <div id="posts">
+
+<%= form_for(@post, id:'new_post') do |c| %>
+          <%= c.hidden_field :follower_id, :value => current_user.id %>
+          <%= c.hidden_field :user_id, :value => current_user.id %>
+          <%= c.hidden_field :title, :value => current_user.first_name+" "+current_user.last_name %>
+          <%= c.text_area :subtitle, id:'thought_input', placeholder: "¿En qué estas pensando?", :maxlength => 55 %>
+          <span class="button-send-advice">
+          <%= submit_tag "Enviar", class:"btn-send-thought" %>
+        </span>
+          <% end %>
   <% if @posts.nil? %>
         <% @last_users.each do |t| %>
           <% if Notification.find_by(follower_id: current_user.id, user_id: t.id).nil? && !current_user.following?(t.id)%>
