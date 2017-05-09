@@ -25,7 +25,7 @@ development:
 #  adapter: postgresql
 #  host: localhost
 #  username: root
-#  password: cachirula
+#  password: ca
 #  database: qbe_development
 
 # Warning: The database defined as "test" will be erased and
